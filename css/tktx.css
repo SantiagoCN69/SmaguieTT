@@ -1,0 +1,40 @@
+.tktx-container
+{
+    width: 90%;
+    background-color: #0005;
+    backdrop-filter: blur(5px); 
+    margin: auto;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-top: 1.5rem;
+    
+    
+}
+
+.tktx-container img {
+    position: absolute;
+    width: 15rem;
+    right: 0;
+    top: 0;
+}
+
+.tktx-instrucciones ol li, .tktx-recomendaciones ul li
+{
+    padding: 1rem;
+}
+.tktx-recomendaciones ul {
+    list-style: none;
+}
+
+h3 {
+    
+    margin-top: 3rem;
+    margin-bottom: .5rem;
+}
+
+@media (max-width: 350px) {
+    .tktx-container img {
+        width: 12rem;
+    }
+}

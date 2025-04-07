@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo</title>
+    <link rel="icon" type="image/png" href="/imagenes/logocirculo.png">
+    <link rel="stylesheet" href="/css/catalogostyles.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(() => console.log("Service Worker registrado correctamente."))
+                .catch(error => console.log("Error registrando el Service Worker:", error));
+        }
+        
+        </script>
+        <link rel="manifest" href="/manifest.json">
+</head>
+<body>
+    <header class="header">
+        <div class="header__logo">
+            <img src="/imagenes/logo.jpg" alt="Studio MaguieTT - Logo" class="header__logo-img" loading="lazy">
+            <div class="header__theme-toggle" onclick="cambiarColor()" title="cambiar paleta de colores">
+                <img src="/imagenes/icono/color.png" class="header__theme-icon">
+            </div>
+        </div>
+        <div class="header__titles">
+            <h1 class="header__title">SMAGUIETT</h1>
+            <h2 class="header__subtitle">Studio Maguie Tattoo.</h2>
+        </div>
+        <div class="header__menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="header__nav">
+            <ul class="header__menu"> 
+                <li class="header__menu-item">
+                    <a href="index.html" class="header__menu-link">Principal</a>
+                </li>
+                <li class="header__menu-item">
+                    <a href="Contacto.html" class="header__menu-link">Contáctanos</a>
+                </li>
+                <li class="header__menu-item">
+                    <a href="ubicacion.html" class="header__menu-link">Ubicación</a>
+                </li>
+            </ul>
+        </nav>
+        
+    </header>
+
+    <hr class="Medium">
+
+    <div class="filtros">
+    
+        <input type="text" id="buscador" placeholder="Buscar productos..." oninput="filtrarProductos()">
+        <div class="select-container">
+            <select id="filtro-precio" onchange="filtrarProductos()">
+                <option value="default">Ordenar por precio</option>
+                <option value="asc">Menor a mayor</option>
+                <option value="desc">Mayor a menor</option>
+            </select>
+        </div>
+        
+        <div class="select-container">
+            <select id="filtro-categoria" onchange="filtrarProductos()">
+                <option value="todas">Todas las categorías</option>
+                <option value="categoria1">Agujas y cartuchos</option>
+                <option value="categoria2">Plantillas y transferencia</option>
+                <option value="categoria3">Productos Reborn</option>
+                <option value="categoria4">Cuidado y Cicatrización</option>
+                <option value="categoria5">Preparacion de la piel</option>
+                <option value="categoria6">Tintas</option>
+                <option value="categoria7">Completa tu mesa de trabajo</option>
+                <option value="categoria8">Accesorios</option>
+            </select>
+        </div>
+    </div>
+
+    <a href="carrito.html"><div id="carrito-container">
+    
+            🛒  <span id="contador-carrito">0</span>
+        
+    </div></a>
+    <audio id="click-sound" src="/sonidoclick/click.mp3"></audio>
+
+    <section class="categoria categoria1 animado">
+        <h2 class="categoria__titulo">Agujas y cartuchos</h2>
+        <div class="categoria__contenedor">
+            <button class="categoria__btn categoria__btn--prev" onclick="moverIzquierda('productos1')">&#10094;</button>
+            <div class="categoria__productos" id="productos1"></div>
+            <button class="categoria__btn categoria__btn--next" onclick="moverDerecha('productos1')">&#10095;</button>
+        </div>
+    </section>
+    
+    <section class="categoria categoria2 animado">
+        <h2 class="categoria__titulo">Plantillas y transferencia</h2>
+        <div class="categoria__contenedor">
+            <button class="categoria__btn categoria__btn--prev" onclick="moverIzquierda('productos2')">&#10094;</button>
+            <div class="categoria__productos" id="productos2"></div>
+            <button class="categoria__btn categoria__btn--next" onclick="moverDerecha('productos2')">&#10095;</button>
+        </div>
+    </section>
+    
+    <section class="categoria categoria3 animado">
+        <h2 class="categoria__titulo">Productos Reborn</h2>
+        <div class="categoria__contenedor">
+            <button class="categoria__btn categoria__btn--prev Rebornboton" onclick="moverIzquierda('productos3')">&#10094;</button>
+            <div class="categoria__productos" id="productos3"></div>
+            <button class="categoria__btn categoria__btn--next Rebornboton" onclick="moverDerecha('productos3')">&#10095;</button>
+        </div>
+    </section>
+    
+    <section class="categoria categoria4 animado">
+        <h2 class="categoria__titulo">Cuidado y Cicatrización</h2>
+        <div class="categoria__contenedor">
+            <button class="categoria__btn categoria__btn--prev" onclick="moverIzquierda('productos4')">&#10094;</button>
+            <div class="categoria__productos" id="productos4"></div>
+            <button class="categoria__btn categoria__btn--next" onclick="moverDerecha('productos4')">&#10095;</button>
+        </div>
+    </section>
+    
+    <section class="categoria categoria5 animado">
+        <h2 class="categoria__titulo">Preparacion de la piel</h2>
+        <div class="categoria__contenedor">
+            <button class="categoria__btn categoria__btn--prev" onclick="moverIzquierda('productos5')">&#10094;</button>
+            <div class="categoria__productos" id="productos5"></div>
+            <button class="categoria__btn categoria__btn--next" onclick="moverDerecha('productos5')">&#10095;</button>
+        </div>
+    </section>
+    
+    <section class="categoria categoria6 animado">
+        <h2 class="categoria__titulo">Tintas</h2>
+        <div class="categoria__contenedor">
+            <button class="categoria__btn categoria__btn--prev" onclick="moverIzquierda('productos6')">&#10094;</button>
+            <div class="categoria__productos" id="productos6"></div>
+            <button class="categoria__btn categoria__btn--next" onclick="moverDerecha('productos6')">&#10095;</button>
+        </div>
+    </section>
+    
+    <section class="categoria categoria7 animado">
+        <h2 class="categoria__titulo">Completa tu mesa de trabajo</h2>
+        <div class="categoria__contenedor">
+            <button class="categoria__btn categoria__btn--prev" onclick="moverIzquierda('productos7')">&#10094;</button>
+            <div class="categoria__productos" id="productos7"></div>
+            <button class="categoria__btn categoria__btn--next" onclick="moverDerecha('productos7')">&#10095;</button>
+        </div>
+    </section>
+    
+    <section class="categoria categoria8 animado">
+        <h2 class="categoria__titulo">Accesorios</h2>
+        <div class="categoria__contenedor">
+            <button class="categoria__btn categoria__btn--prev" onclick="moverIzquierda('productos8')">&#10094;</button>
+            <div class="categoria__productos" id="productos8"></div>
+            <button class="categoria__btn categoria__btn--next" onclick="moverDerecha('productos8')">&#10095;</button>
+        </div>
+    </section>
+    
+<div class="no-productos">
+    <p id="mensaje-no-productos">
+        No se encontraron productos.
+    </p>
+</div>
+
+
+    <hr class="Medium">
+
+
+
+    <footer class="footer" id="contacto">
+        <nav class="footer__nav" aria-label="Redes sociales">
+            <ul class="footer__list">
+            <li class="footer__item">
+                <a href="https://wa.me/573053662867" target="_blank" title="WhatsApp" class="footer__link footer__link--whatsapp">
+                    <img src="/imagenes/icono/whatsapp.png" alt="WhatsApp" class="footer__icon" loading="lazy">
+                </a>
+            </li>
+            <li class="footer__item">
+                <a href="https://www.instagram.com/smaguiett/" target="_blank" title="Instagram" class="footer__link footer__link--instagram">
+                    <img src="/imagenes/icono/instagram.png" alt="Instagram" class="footer__icon" loading="lazy">
+                </a>
+            </li>
+            <li class="footer__item">
+                <a href="https://www.facebook.com/smaguiett" target="_blank" title="Facebook" class="footer__link footer__link--facebook">
+                    <img src="/imagenes/icono/facebook.png" alt="Facebook" class="footer__icon" loading="lazy">
+                </a>
+            </li>
+            <li class="footer__item">
+                <a href="https://www.tiktok.com/@smaguiett" target="_blank" title="TikTok" class="footer__link footer__link--tiktok">
+                    <img src="/imagenes/icono/tiktok.png" alt="TikTok" class="footer__icon" loading="lazy">
+                </a>
+            </li>
+            </ul>
+        </nav>
+        <p class="footer__text">Developed by <span class="footer__author">Santiago Cardona</span> <span class="footer__emoji" onclick="redireccionar()">😼</span></p>
+    </footer>
+
+    <script src="/js/scripts.js"></script>
+    <script type="module" src="js/catalogo.js"></script>
+
+</body>
+</html>

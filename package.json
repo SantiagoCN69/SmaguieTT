@@ -1,0 +1,24 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "**Smaguiett** es una aplicación web desarrollada para optimizar la experiencia de compra de insumos y cosméticos para tatuajes. Construida con un enfoque en rendimiento, accesibilidad y facilidad de uso, esta plataforma ofrece una navegación fluida y rápida, adaptándose a cualquier dispositivo.",
+  "main": "sw.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yasi6969/smaguiett.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yasi6969/smaguiett/issues"
+  },
+  "homepage": "https://github.com/yasi6969/smaguiett#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "firebase": "^11.6.0"
+  }
+}

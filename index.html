@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6SH430B0TE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-6SH430B0TE');
+    </script>
+    
+    <meta name="twitter:card" content="/imagenes/banner.jpg">
+    <meta name="twitter:site" content="@smaguiett">
+    <meta name="twitter:title" content="Studio MaguieTT - Insumos para tatuadores">
+    <meta name="twitter:description" content="Los mejores productos para tatuadores, piercings y smoke shop en un solo lugar.">
+    <meta name="twitter:image" content="/imagenes/banner.jpg">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Studio Maguie Tattoo es tu tienda especializada en insumos para tatuadores, piercing y smoke shop. Encuentra agujas, tintas, anestésicos y más.">
+    <meta name="keywords" content="insumos para tatuadores, agujas de tatuaje, tintas para tatuar, piercing, smoke shop">
+    <meta name="author" content="Santiago Cardona">
+
+    <meta property="og:title" content="Studio Maguie Tattoo - Insumos para tatuadores">
+    <meta property="og:description" content="Los mejores productos para tatuadores, piercings y smoke shop en un solo lugar.">
+    <meta property="og:image" content="/imagenes/banner.jpg">
+    <meta property="og:type" content="website">
+
+    <title>SmaguieTT - Insumos para tatuadores, piercing y smoke shop</title>
+    <link rel="icon" type="image/png" href="/imagenes/logocirculo.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="manifest" href="/manifest.json">
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+
+                })
+                .catch(error => console.log(" Error registrando el Service Worker:", error));
+        }
+    </script>
+</head>
+<body>
+    <div id="install-banner" class="install-banner" role="alert">
+        <p class="install-banner__text">¿Quieres instalar nuestra Web App?</p>
+        <button class="install-banner__btn install-banner__btn--install" 
+                onclick="instalarApp()" 
+                aria-label="Instalar aplicación">
+            Instalar
+        </button>
+        <button class="install-banner__btn install-banner__btn--close" 
+                onclick="cerrarBanner()" 
+                aria-label="Cerrar mensaje">
+            Cerrar
+        </button>
+    </div>
+
+    
+<header class="header">
+    <div class="header__logo">
+        <img src="/imagenes/logo.jpg" alt="Studio MaguieTT - Logo" class="header__logo-img" loading="lazy">
+        <div class="header__theme-toggle" onclick="cambiarColor()" title="cambiar paleta de colores">
+            <img src="/imagenes/icono/color.png" class="header__theme-icon">
+        </div>
+    </div>
+    <div class="header__titles">
+        <h1 class="header__title">SMAGUIETT</h1>
+        <h2 class="header__subtitle">Studio Maguie Tattoo.</h2>
+    </div>
+    <div class="header__menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <nav class="header__nav">
+        <ul class="header__menu"> 
+            <li class="header__menu-item">
+                <a href="catalogo.html" class="header__menu-link">Catálogo</a>
+            </li>
+            <li class="header__menu-item">
+                <a href="Contacto.html" class="header__menu-link">Contáctanos</a>
+            </li>
+            <li class="header__menu-item">
+                <a href="ubicacion.html" class="header__menu-link">Ubicación</a>
+            </li>
+        </ul>
+    </nav>
+    
+</header>
+
+<hr class="Medium">
+
+
+<main>
+    <div id="bienvenida" class="animado">
+        <h2>¡Bienvenidos a Smaguiett!</h2>
+        <p>Tu mejor opción en insumos para tatuadores en Ibagué.</p>
+    </div>
+
+    <div class="swiper swiper1 animado">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide imagen-con-superposicion">
+                <img src="/imagenes/banners/Tatuadora.jpg" alt="Estudio de trabajo" loading="lazy">
+                <a href="https://www.instagram.com/nia_tattoo" target="_blank">
+                    <img src="/imagenes/banners/tatuadorasuperposicion.png" alt="Logo de Smaguiett" class="imagen-superpuesta" loading="lazy">
+                </a>
+            </div>
+
+            <div class="swiper-slide imagen-con-superposicion">
+                <img src="/imagenes/banners/estudio.jpg" alt="Studio de trabajo Smaguiett" loading="lazy">
+                <img src="/imagenes/banners/estudiosuperposicion.png" alt="Logo de Smaguiett" loading="lazy" class="imagen-superpuesta">
+            </div>
+
+            <div class="swiper-slide imagen-con-superposicion">
+                <img src="/imagenes/banners/mapa.jpg" alt="Ubicación en Google Maps" loading="lazy">
+                <a href="https://maps.app.goo.gl/Lmap2hCsWcZ8w6xB8" target="_blank">
+                    <img src="/imagenes/banners/mapasuperposicion.png" alt="Ver en Google Maps" class="imagen-superpuesta2" loading="lazy">
+                </a>
+            </div>
+        </div>
+
+        <div class="swiper-button-next next1">&#10095;</div>
+        <div class="swiper-button-prev prev1">&#10094;</div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <hr class="Medium">
+
+    <div id="informacion">
+        <div id="textoinfo" class="texto animado">
+            <h2>Sobre nosotros</h2>
+            <p>Somos una tienda física y virtual de la ciudad Ibagué, Tolima, especializada en insumos para tatuadores. Aquí encontrarás equipos profesionales, tintas de alta calidad, cremas anestésicas y todo lo que necesitas para tu mesa de trabajo.
+            Además, contamos con una gran variedad de body piercing y joyería de excelente calidad.
+            
+            📦 Realizamos domicilios en toda Ibagué para que recibas tus productos de forma rápida y segura.
+            
+            ¡Visítanos y descubre todo lo que tenemos para ti! ✨✨</p>
+        </div>
+        
+        <div id="videoinfo" class="video animado">
+            <video id="miVideo" loop autoplay muted controls loading="lazy">
+                <source src="/imagenes/video_inicio.mp4" type="video/mp4">
+                Tu navegador no soporta el video.
+            </video>
+        </div>
+    </div>
+
+    <hr class="Medium">
+
+    <section id="caracteristicas" class="animado">
+        <div class="caracteristica">
+            <h3><img src="/imagenes/caracteristicas/calidad.png" alt="Calidad Garantizada" class="iconocaracteristicas">Calidad Superior</h3>
+            <p>Productos probados y utilizados por tatuadores profesionales. Aseguramos la mejor calidad en cada insumo para resultados perfectos.</p>
+        </div>
+
+        <div class="caracteristica">
+            <h3><img src="/imagenes/caracteristicas/precios.png" alt="Precios Justos" class="iconocaracteristicas">Precios Justos</h3>
+            <p>Ofrecemos los mejores precios sin comprometer la calidad. Consigue los productos esenciales al costo más accesible del mercado.</p>
+        </div>
+
+        <div class="caracteristica">
+            <h3><img src="/imagenes/caracteristicas/variedad.png" alt="Amplia Variedad" class="iconocaracteristicas">Amplio Catálogo</h3>
+            <p>Desde agujas, máquinas y tintas hasta cremas y accesorios. Todo lo que necesitas en un solo lugar, con opciones para cada estilo y técnica.</p>
+        </div>
+
+        <div class="caracteristica">
+            <h3><img src="imagenes/caracteristicas/envio.png" alt="Envíos Gratis" class="iconocaracteristicas">Envíos Gratis</h3>
+            <p>Recibe tus insumos de forma rápida y segura en la puerta de tu casa con un minimo de compra de 25K. Servicio exclusivo en Ibagué.</p>
+        </div>
+    </section>
+
+
+</main>
+
+<hr class="Medium">
+
+<h2 class="h2swiper2">Productos Destacados</h2>
+
+<section class="productostendencia animado">
+    <div class="productos__container swiper">
+        <div class="productos__content">
+            <div class="swiper-wrapper">
+                <article class="card__producto swiper-slide">
+                    <div class="card__image">
+                        <div class="card__image-inner">
+                            <img src="/imagenes/catalogo/cartuchos_lapiceros_ixoye.png" alt="Cartucho lapicero" title="Cartucho lapicero" loading="lazy">
+                            <div class="card__image-back">
+                                <a href="https://wa.me/573053662867?text=Hola%2C%20me%20interesa%20el%20cartucho%20lapicero." target="_blank">
+                                    <img src="imagenes/icono/pedir.png" alt="pedir por whatsapp" title="Pedir por whatsapp">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card__data">
+                        <h3 class="card__price">$4.000 c/u</h3>
+                        <p class="card__description">
+                            <span class="texto-corto">
+                                Contiene pigmento incluido, no necesita tinta adicional.
+                            </span>
+                            <span class="texto-largo"> 
+                                Sellado de cera para evitar evaporación, ideal para prácticas de tatuaje.
+                            </span>
+                            <button class="ver-mas">Ver más</button>
+                        </p>
+                    </div>
+                </article>
+
+                
+                <article class="card__producto swiper-slide">
+                    <div class="card__image">
+                        <div class="card__image-inner">
+                            <img src="/imagenes/catalogo/cubre_grip.png" alt="Cubre grip" title="Cubre grip" loading="lazy">
+                            <div class="card__image-back">
+                                <a href="https://wa.me/573053662867?text=Hola%2C%20estoy%20interesad%40%20en%20el%20cubre%20grip." target="_blank">
+                                    <img src="imagenes/icono/pedir.png" alt="pedir por whatsapp" title="Pedir por whatsapp">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card__data">
+                        <h3 class="card__price">$8.000 - $10.000 c/u</h3>
+                        <p class="card__description">
+                            <span class="texto-corto">
+                                Disponible en negro, calaveras y naranja.
+                            </span>
+                            <span class="texto-largo"> 
+                                Diseño antideslizante con tamaño ajustable para un mejor agarre.
+                            </span>
+                            <button class="ver-mas">Ver más</button>
+                        </p>
+                    </div>
+                </article>
+
+                
+                <article class="card__producto swiper-slide">
+                    <div class="card__image">
+                        <div class="card__image-inner">
+                            <img src="/imagenes/catalogo/crema_anestesica_tktx.png" alt="Crema anestésica TKTX" title="Crema anestésica TKTX" loading="lazy">
+                            <div class="card__image-back">
+                                <a href="https://wa.me/573053662867?text=Hola%2C%20quisiera%20preguntar%20por%20la%20crema%20anest%C3%A9sica%20TKTX." target="_blank">
+                                    <img src="imagenes/icono/pedir.png" alt="pedir por whatsapp" title="Pedir por whatsapp">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card__data">
+                        <h3 class="card__price">$40.000 c/u</h3>
+                        <p class="card__description">
+                            <span class="texto-corto">
+                                Crema anestésica para reducir el dolor en tatuajes.
+                            </span>
+                            <span class="texto-largo"> 
+                                Ideal para sesiones largas, ofrece un efecto duradero y seguro en la piel. 
+                                <a class="instruccionestktx" href="instrucciones-productos-tktx.html">instrucciones</a>
+                            </span>
+                            <button class="ver-mas">Ver más</button>
+                        </p>
+                    </div>
+                </article>
+
+                
+                <article class="card__producto swiper-slide">
+                    <div class="card__image">
+                        <div class="card__image-inner">
+                            <img src="/imagenes/catalogo/gel_anastesica_tktx.png" alt="Gel anestésico TKTX" title="Gel anestésico TKTX" loading="lazy">
+                            <div class="card__image-back">
+                                <a href="https://wa.me/573053662867?text=Hola%2C%20me%20interesa%20el%20gel%20anest%C3%A9sico%20TKTX." target="_blank">
+                                    <img src="imagenes/icono/pedir.png" alt="pedir por whatsapp" title="Pedir por whatsapp">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card__data">
+                        <h3 class="card__price">$50.000 c/u</h3>
+                        <p class="card__description">
+                            <span class="texto-corto">
+                                Gel anestésico de rápida absorción.
+                            </span>
+                            <span class="texto-largo"> 
+                                Alivio instantáneo para tatuajes con efecto prolongado y sin irritaciones. 
+                                <a class="instruccionestktx" href="instrucciones-productos-tktx.html">instrucciones</a>
+                            </span>
+                            <button class="ver-mas">Ver más</button>
+                        </p>
+                    </div>
+                </article>
+
+                <article class="card__producto swiper-slide">
+                    <div class="card__image">
+                        <div class="card__image-inner">
+                            <img src="/imagenes/catalogo/removedor_stencil.png" alt="Stencil Protón" title="Stencil Protón" loading="lazy">
+                            <div class="card__image-back">
+                                <a href="https://wa.me/573053662867?text=Hola%2C%20estoy%20interesad%40%20en%20el%20Stencil%20Prot%C3%B3n." target="_blank">
+                                    <img src="imagenes/icono/pedir.png" alt="pedir por whatsapp" title="Pedir por whatsapp">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card__data">
+                        <h3 class="card__price">$25.000 c/u </h3>
+                        <p class="card__description">
+                            <span class="texto-corto">
+                                Eliminador de stencil para tatuajes de 120ml.
+                            </span>
+                            <span class="texto-largo"> 
+                                Fórmula especial que remueve plantillas sin irritar la piel.
+                            </span>
+                            <button class="ver-mas">Ver más</button>
+                        </p>
+                    </div>
+                </article>
+
+                
+                
+
+            </div>
+        </div>
+    </div>
+    <div class="swiper-button-next next2">
+        &#10095;
+    </div>
+    <div class="swiper-button-prev prev2">
+        &#10094;
+    </div>
+</section>
+
+<hr class="Medium">
+
+<section class="final animado">
+    <p class="final-texto">"Tu cuerpo, tu historia, tu arte. Expresalo con estilo y sin miedo. 🖌️💫"</p>
+    <a href="/catalogo.html"><p class="finalspan">¿Listo para tu próxima sesión?</p></a>
+</section>
+
+<hr class="Medium">
+
+<footer class="footer" id="contacto">
+    <nav class="footer__nav" aria-label="Redes sociales">
+        <ul class="footer__list">
+        <li class="footer__item">
+            <a href="https://wa.me/573053662867" target="_blank" title="WhatsApp" class="footer__link footer__link--whatsapp">
+                <img src="/imagenes/icono/whatsapp.png" alt="WhatsApp" class="footer__icon" loading="lazy">
+            </a>
+        </li>
+        <li class="footer__item">
+            <a href="https://www.instagram.com/smaguiett/" target="_blank" title="Instagram" class="footer__link footer__link--instagram">
+                <img src="/imagenes/icono/instagram.png" alt="Instagram" class="footer__icon" loading="lazy">
+            </a>
+        </li>
+        <li class="footer__item">
+            <a href="https://www.facebook.com/smaguiett" target="_blank" title="Facebook" class="footer__link footer__link--facebook">
+                <img src="/imagenes/icono/facebook.png" alt="Facebook" class="footer__icon" loading="lazy">
+            </a>
+        </li>
+        <li class="footer__item">
+            <a href="https://www.tiktok.com/@smaguiett" target="_blank" title="TikTok" class="footer__link footer__link--tiktok">
+                <img src="/imagenes/icono/tiktok.png" alt="TikTok" class="footer__icon" loading="lazy">
+            </a>
+        </li>
+        </ul>
+    </nav>
+    <p class="footer__text">Developed by <span class="footer__author">Santiago Cardona</span> <span class="footer__emoji" onclick="redireccionar()">😼</span></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/scripts.js"></script>
+<script type="module" src="/js/prueba-fcm.js"></script>
+
+</body>
+</html>
