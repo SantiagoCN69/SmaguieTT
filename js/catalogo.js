@@ -15,6 +15,9 @@ function moverDerecha(id) {
     moverScroll(id, 1);
 }
 
+window.moverIzquierda = moverIzquierda;
+window.moverDerecha = moverDerecha;
+
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Intentando cargar productos...");
     cargarCarrito(); 
@@ -49,8 +52,19 @@ document.addEventListener("click", (event) => {
     else if (!event.target.closest(".producto__descripcion")) {
         cerrarDescripciones();
     }
-});
 
+    const scrollButton = event.target.closest('.categoria__btn');
+    if (scrollButton) {
+        const action = scrollButton.dataset.action;
+        const target = scrollButton.dataset.target;
+        
+        if (action === 'prev') {
+            moverIzquierda(target);
+        } else if (action === 'next') {
+            moverDerecha(target);
+        }
+    }
+});
 
 document.getElementById("filtro-categoria").addEventListener("change", () => {
     filtrarProductos();
@@ -213,7 +227,7 @@ async function cargarProductos() {
 
         productosGlobales = productosOrdenadosFirestore;
         
- 
+
         renderizarProductos(productosOrdenadosFirestore);
         
         console.log(" Productos actualizados desde Firestore");
