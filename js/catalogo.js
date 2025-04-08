@@ -422,11 +422,6 @@ function agregarAlCarrito(id) {
         carrito.push({ ...producto, cantidad: 1 });
     }
 
-    const sonido = document.getElementById("click-sound");
-    if (sonido) {
-        sonido.currentTime = 0;
-        sonido.play().catch(e => console.log("Error al reproducir sonido", e));
-    }
     const contenedorCarrito = document.getElementById("carrito-container");
     if (contenedorCarrito) {
         contenedorCarrito.classList.add("carrito-click");
