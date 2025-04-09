@@ -48,7 +48,6 @@
 
 }
 
-/* Flecha personalizada */
 .select-container::after {
     content: "▼";
     font-size: 0.9rem;
@@ -110,7 +109,6 @@ background-color:#000;
 }
 #carrito-container:hover {
     transform: scale(1.1);
-    box-shadow: 0px 0px 5px var(--color-principal);
 
 }
 .carrito-click {
@@ -127,10 +125,6 @@ background-color:#000;
     top: -15px;
     right: -15px;
 }
-#carrito-container:hover #contador-carrito {
-    text-shadow: 0px 0px 10px var(--color-principal)
-}
-
 
 .categoria {
     margin: 30px 0;
@@ -710,5 +704,55 @@ background-color:#000;
 @media (max-width: 406px) {
     #filtro-precio, #filtro-categoria {
         font-size: 12px;
+    }
+}
+
+
+
+/*Carrito contador */
+
+
+.agregar-carrito {
+    position: relative;
+    overflow: visible;
+}
+
+.contador-circulo {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--color-principal);
+    box-shadow: 0px 0px 5px #000;
+    color: white;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    z-index: 1;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+}
+
+.contador-circulo.mostrar {
+    transform: scale(1);
+}
+
+.contador-circulo span {
+    display: inline-block;
+    animation: rueda 0.4s ease forwards;
+}
+
+@keyframes rueda {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }

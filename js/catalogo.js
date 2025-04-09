@@ -229,6 +229,10 @@ async function cargarProductos() {
         
 
         renderizarProductos(productosOrdenadosFirestore);
+        carrito.forEach(item => {
+            mostrarContadorEnBoton(item.id, item.cantidad);
+        });
+
         
         console.log(" Productos actualizados desde Firestore");
         console.timeEnd(" Carga de Productos");
@@ -403,8 +407,12 @@ function filtrarProductos() {
         seccion.style.display = productosVisibles > 0 ? "block" : "none";
     });
 
+    mensajeNoProductos.textContent = "No se encontraron productos.";
     mensajeNoProductos.style.display = totalProductosVisibles > 0 ? "none" : "block";
+    
 }
+
+
 
 // FUNCIONES DEL CARRITO
 
@@ -432,6 +440,9 @@ function agregarAlCarrito(id) {
 
     guardarCarrito();
     actualizarContadorCarrito();
+    mostrarContadorEnBoton(id, carrito.find(p => p.id === id).cantidad);
+
+
 }
 
 
@@ -488,4 +499,26 @@ function verificarAlmacenamientoLocal() {
         console.error(" Error al verificar almacenamiento local:", error);
         return null;
     }
+}
+
+
+//contador carrito en el boton 
+function mostrarContadorEnBoton(idProducto, cantidad) {
+    const boton = document.querySelector(`.agregar-carrito[data-id="${idProducto}"]`);
+    if (!boton) return;
+
+    let contador = boton.querySelector(".contador-circulo");
+
+    if (!contador) {
+        contador = document.createElement("div");
+        contador.className = "contador-circulo";
+        boton.appendChild(contador);
+    }
+
+    contador.innerHTML = `<span>${cantidad}</span>`;
+    contador.classList.add("mostrar");
+
+    // Reinicia la animación para que se note el cambio
+    void contador.offsetWidth;
+    contador.querySelector("span").style.animation = "rueda 0.4s ease";
 }
