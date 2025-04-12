@@ -1,50 +1,63 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6SH430B0TE"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-6SH430B0TE');
-    </script>
-    
-    <meta name="twitter:card" content="/imagenes/banner.jpg">
-    <meta name="twitter:site" content="@smaguiett">
-    <meta name="twitter:title" content="Studio MaguieTT - Insumos para tatuadores">
-    <meta name="twitter:description" content="Los mejores productos para tatuadores, piercings y smoke shop en un solo lugar.">
-    <meta name="twitter:image" content="/imagenes/banner.jpg">
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Studio Maguie Tattoo es tu tienda especializada en insumos para tatuadores, piercing y smoke shop. Encuentra agujas, tintas, anestésicos y más.">
-    <meta name="keywords" content="insumos para tatuadores, agujas de tatuaje, tintas para tatuar, piercing, smoke shop">
-    <meta name="author" content="Santiago Cardona">
-
-    <meta property="og:title" content="Studio Maguie Tattoo - Insumos para tatuadores">
-    <meta property="og:description" content="Los mejores productos para tatuadores, piercings y smoke shop en un solo lugar.">
-    <meta property="og:image" content="/imagenes/banner.jpg">
-    <meta property="og:type" content="website">
-
-    <title>SmaguieTT - Insumos para tatuadores, piercing y smoke shop</title>
-    <link rel="icon" type="image/png" href="/imagenes/logocirculo.png">
-    <link rel="preload" href="/css/styles.css" as="style">
-    <link rel="preload" href="/imagenes/logocirculo.png" as="image">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" as="script">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="manifest" href="/manifest.json">
-
-    <script>
-        if ('serviceWorker' in navigator) {
+    <head>
+        <!-- Etiquetas esenciales -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SmaguieTT - Insumos para tatuadores, piercing y smoke shop</title>
+        <meta name="description" content="Studio Maguie Tattoo es tu tienda especializada en insumos para tatuadores, piercing y smoke shop. Encuentra agujas, tintas, anestésicos y más.">
+        <meta name="keywords" content="insumos para tatuadores, agujas de tatuaje, tintas para tatuar, piercing, smoke shop">
+        <meta name="author" content="Santiago Cardona">
+        <meta name="theme-color" content="#000000">
+        <meta name="application-name" content="SmaguieTT">
+      
+        <!-- SEO y Open Graph -->
+        <link rel="canonical" href="https://smaguiett.netlify.app/">
+        <meta property="og:title" content="Studio Maguie Tattoo - Insumos para tatuadores">
+        <meta property="og:description" content="Los mejores productos para tatuadores, piercings y smoke shop en un solo lugar.">
+        <meta property="og:image" content="https://smaguiett.netlify.app/imagenes/logocirculo.png">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://smaguiett.netlify.app">
+        <meta property="og:site_name" content="SmaguieTT">
+      
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Studio Maguie Tattoo - Insumos para tatuadores">
+        <meta name="twitter:description" content="Los mejores productos para tatuadores, piercings y smoke shop en un solo lugar.">
+        <meta name="twitter:image" content="https://smaguiett.netlify.app/imagenes/logocirculo.png">
+      
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="/imagenes/logocirculo.png" sizes="16x16 32x32 48x48">
+      
+        <!-- Estilos -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+        <link rel="stylesheet" href="/css/styles.css">
+      
+        <!-- Manifest & PWA -->
+        <link rel="manifest" href="/manifest.json">
+      
+        <!-- Preconnect para rendimiento -->
+        <link rel="preconnect" href="https://www.googletagmanager.com">
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+      
+        <!-- Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-6SH430B0TE"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-6SH430B0TE');
+        </script>
+      
+        <!-- Service Worker -->
+        <script>
+          if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js')
-                .then((registration) => {
-
-                })
-                .catch(error => console.log(" Error registrando el Service Worker:", error));
-        }
-    </script>
-</head>
+              .catch(error => console.log("❌ Error registrando el Service Worker:", error));
+          }
+        </script>
+      </head>
+      
 <body>
     <div id="install-banner" class="install-banner" role="alert">
         <p class="install-banner__text">¿Quieres instalar nuestra Web App?</p>
@@ -65,7 +78,7 @@
     <div class="header__logo">
         <img src="/imagenes/logo.jpg" alt="Studio MaguieTT - Logo" class="header__logo-img" loading="lazy">
         <div class="header__theme-toggle" onclick="cambiarColor()" title="cambiar paleta de colores">
-            <img src="/imagenes/icono/color.png" class="header__theme-icon">
+            <img src="/imagenes/icono/color.png" alt="cambiar de color" class="header__theme-icon">
         </div>
     </div>
     <div class="header__titles">
@@ -83,7 +96,7 @@
                 <a href="catalogo.html" class="header__menu-link">Catálogo</a>
             </li>
             <li class="header__menu-item">
-                <a href="Contacto.html" class="header__menu-link">Contáctanos</a>
+                <a href="contacto.html" class="header__menu-link">Contáctanos</a>
             </li>
             <li class="header__menu-item">
                 <a href="ubicacion.html" class="header__menu-link">Ubicación</a>
@@ -97,27 +110,31 @@
 
 
 <main>
-    <div id="bienvenida" class="animado">
+    <div id="bienvenida" class="">
         <h2>¡Bienvenidos a Smaguiett!</h2>
         <p>Tu mejor opción en insumos para tatuadores en Ibagué.</p>
     </div>
 
-    <div class="swiper swiper1 animado">
+    <div class="swiper swiper1 ">
         <div class="swiper-wrapper">
             <div class="swiper-slide imagen-con-superposicion">
-                <img src="/imagenes/banners/Tatuadora.jpg" alt="Estudio de trabajo" loading="lazy" width="800" height="600">
+                <img src="/imagenes/banners/estudiofrente.jpg" alt="Local Smaguiett" loading="lazy">
+                
+            </div>
+            <div class="swiper-slide imagen-con-superposicion">
+                <img src="/imagenes/banners/Tatuadora.jpg" alt="Estudio de trabajo" loading="lazy">
                 <a href="https://www.instagram.com/nia_tattoo" target="_blank" rel="noopener">
                     <img src="/imagenes/banners/tatuadorasuperposicion.png" alt="Logo de Smaguiett" class="imagen-superpuesta" loading="lazy" width="200" height="200">
                 </a>
             </div>
 
             <div class="swiper-slide imagen-con-superposicion">
-                <img src="/imagenes/banners/estudio.jpg" alt="Studio de trabajo Smaguiett" loading="lazy" width="800" height="600">
+                <img src="/imagenes/banners/estudio.jpg" alt="Studio de trabajo Smaguiett" loading="lazy">
                 <img src="/imagenes/banners/estudiosuperposicion.png" alt="Logo de Smaguiett" loading="lazy" class="imagen-superpuesta" width="200" height="200">
             </div>
 
             <div class="swiper-slide imagen-con-superposicion">
-                <img src="/imagenes/banners/mapa.jpg" alt="Ubicación en Google Maps" loading="lazy" width="800" height="600">
+                <img src="/imagenes/banners/mapa.jpg" alt="Ubicación en Google Maps" loading="lazy">
                 <a href="https://maps.app.goo.gl/Lmap2hCsWcZ8w6xB8" target="_blank" rel="noopener">
                     <img src="/imagenes/banners/mapasuperposicion.png" alt="Ver en Google Maps" class="imagen-superpuesta2" loading="lazy" width="200" height="200">
                 </a>
@@ -132,7 +149,7 @@
     <hr class="Medium">
 
     <div id="informacion">
-        <div id="textoinfo" class="texto animado">
+        <div id="textoinfo" class="texto ">
             <h2>Sobre nosotros</h2>
             <p>Somos una tienda física y virtual de la ciudad Ibagué, Tolima, especializada en insumos para tatuadores. Aquí encontrarás equipos profesionales, tintas de alta calidad, cremas anestésicas y todo lo que necesitas para tu mesa de trabajo.
             Además, contamos con una gran variedad de body piercing y joyería de excelente calidad.
@@ -142,7 +159,7 @@
             ¡Visítanos y descubre todo lo que tenemos para ti! ✨✨</p>
         </div>
         
-        <div id="videoinfo" class="video animado">
+        <div id="videoinfo" class="video ">
             <video id="miVideo" loop autoplay muted controls loading="lazy">
                 <source src="/imagenes/video_inicio.mp4" type="video/mp4">
                 Tu navegador no soporta el video.
@@ -152,7 +169,7 @@
 
     <hr class="Medium">
 
-    <section id="caracteristicas" class="animado">
+    <section id="caracteristicas" class="">
         <div class="caracteristica">
             <h3><img src="/imagenes/caracteristicas/calidad.png" alt="Calidad Garantizada" class="iconocaracteristicas" width="24" height="24">Calidad Superior</h3>
             <p>Productos probados y utilizados por tatuadores profesionales. Aseguramos la mejor calidad en cada insumo para resultados perfectos.</p>
@@ -181,7 +198,7 @@
 
 <h2 class="h2swiper2">Productos Destacados</h2>
 
-<section class="productostendencia animado">
+<section class="productostendencia ">
     <div class="productos__container swiper">
         <div class="productos__content">
             <div class="swiper-wrapper">
@@ -336,7 +353,7 @@
 
 <hr class="Medium">
 
-<section class="final animado">
+<section class="final ">
     <p class="final-texto">"Tu cuerpo, tu historia, tu arte. Expresalo con estilo y sin miedo. 🖌️💫"</p>
     <a href="/catalogo.html"><p class="finalspan">¿Listo para tu próxima sesión?</p></a>
 </section>
