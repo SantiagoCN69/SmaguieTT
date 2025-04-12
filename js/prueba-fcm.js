@@ -19,7 +19,7 @@ if ("serviceWorker" in navigator) {
 
 async function tokenExiste(token) {
   try {
-    const docRef = doc(db, "tokens", token);
+    const docRef = doc(db, "tokensusuarios", token);
     const docSnap = await getDoc(docRef);
     return docSnap.exists();
   } catch (error) {
@@ -29,7 +29,7 @@ async function tokenExiste(token) {
 
 async function guardarToken(token) {
   try {
-    const docRef = doc(db, "tokens", token);
+    const docRef = doc(db, "tokensusuarios", token);
     await setDoc(docRef, { token, timestamp: serverTimestamp() }, { merge: true });
   } catch (e) {}
 }

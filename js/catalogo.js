@@ -19,7 +19,6 @@ window.moverIzquierda = moverIzquierda;
 window.moverDerecha = moverDerecha;
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("Intentando cargar productos...");
     cargarCarrito(); 
     cargarProductos();
     actualizarContadorCarrito();
@@ -113,7 +112,6 @@ let firestoreDb = null;
 function loadFirebase() {
     return new Promise((resolve, reject) => {
         if (window.firebase && window.firebase.apps.length > 0) {
-            console.log(" Firebase ya está inicializado");
             firebaseApp = window.firebase.apps[0];
             firestoreDb = window.firebase.firestore();
             resolve({ app: firebaseApp, db: firestoreDb });
@@ -121,7 +119,6 @@ function loadFirebase() {
         }
 
         if (window.firebase) {
-            console.log(" Inicializando Firebase con configuración");
             try {
                 firebaseApp = window.firebase.initializeApp(firebaseConfig);
                 firestoreDb = window.firebase.firestore();
@@ -143,7 +140,6 @@ function loadFirebase() {
                 try {
                     firebaseApp = firebase.initializeApp(firebaseConfig);
                     firestoreDb = firebase.firestore();
-                    console.log(" Firebase inicializado correctamente");
                     resolve({ app: firebaseApp, db: firestoreDb });
                 } catch (error) {
                     console.error(" Error inicializando Firebase:", error);
@@ -167,11 +163,8 @@ function loadFirebase() {
 
 async function probarConexionFirestore(db) {
     try {
-        console.log(" Intentando conectar a Firestore");
         const productosRef = db.collection("productos");
         const querySnapshot = await productosRef.get();
-        console.log(" Conexión a Firestore exitosa");
-        console.log(` Total de productos encontrados: ${querySnapshot.docs.length}`);
         return querySnapshot.docs.length > 0;
     } catch (error) {
         console.error(" Error conectando a Firestore:", error);
@@ -182,22 +175,18 @@ async function probarConexionFirestore(db) {
 // Cargar productos
 async function cargarProductos() {
     try {
-        console.time(" Carga de Productos");
-        
         verificarAlmacenamientoLocal();
         
         const productosEnCache = localStorage.getItem('productosCache');
         const ultimaActualizacionCache = localStorage.getItem('productosUltimaActualizacion');
         
         if (productosEnCache) {
-            console.log(" Cargando productos desde caché");
             const productosParseados = JSON.parse(productosEnCache);
             
             const productosOrdenados = productosParseados.sort(compararProductos);
             
             productosGlobales = productosOrdenados;
             renderizarProductos(productosOrdenados);
-            console.log(" Productos cargados desde caché");
         }
         
         const { db } = await loadFirebase();
@@ -206,7 +195,6 @@ async function cargarProductos() {
         
         if (!conexionExitosa) {
             console.error(" No se pudo conectar a Firestore");
-            console.timeEnd(" Carga de Productos");
             return;
         }
         
@@ -234,11 +222,8 @@ async function cargarProductos() {
         });
 
         
-        console.log(" Productos actualizados desde Firestore");
-        console.timeEnd(" Carga de Productos");
     } catch (error) {
         console.error(" Error al cargar productos:", error);
-        console.timeEnd(" Carga de Productos");
     }
 }
 
@@ -336,83 +321,88 @@ function renderizarProductos(productos) {
 
 // Filtrar productos
 function filtrarProductos() {
-    const filtroTexto = document.getElementById("buscador").value.toLowerCase();
-    const filtroCategoria = document.getElementById("filtro-categoria").value;
-    const filtroPrecio = document.getElementById("filtro-precio").value;
-    const mensajeNoProductos = document.getElementById("mensaje-no-productos");
+    try {
+        const filtroTexto = document.getElementById("buscador").value.toLowerCase();
+        const filtroCategoria = document.getElementById("filtro-categoria").value;
+        const filtroPrecio = document.getElementById("filtro-precio").value;
+        const mensajeNoProductos = document.getElementById("mensaje-no-productos");
 
-    const categorias = [
-        { id: "productos1", key: "categoria1" },
-        { id: "productos2", key: "categoria2" },
-        { id: "productos3", key: "categoria3" },
-        { id: "productos4", key: "categoria4" },
-        { id: "productos5", key: "categoria5" },
-        { id: "productos6", key: "categoria6" },
-        { id: "productos7", key: "categoria7" },
-        { id: "productos8", key: "categoria8" }
-    ];
+        const categorias = [
+            { id: "productos1", key: "categoria1" },
+            { id: "productos2", key: "categoria2" },
+            { id: "productos3", key: "categoria3" },
+            { id: "productos4", key: "categoria4" },
+            { id: "productos5", key: "categoria5" },
+            { id: "productos6", key: "categoria6" },
+            { id: "productos7", key: "categoria7" },
+            { id: "productos8", key: "categoria8" }
+        ];
 
-    let totalProductosVisibles = 0;
+        let totalProductosVisibles = 0;
 
-    categorias.forEach(({ id, key }) => {
-        const contenedor = document.getElementById(id);
-        const seccion = document.querySelector(`.${key}`);
-        const productos = productosGlobales.filter(producto => producto.categoria === key);
+        categorias.forEach(({ id, key }) => {
+            const contenedor = document.getElementById(id);
+            const seccion = document.querySelector(`.${key}`);
+            const productos = productosGlobales.filter(producto => producto.categoria === key);
 
-        const productosFiltrados = productos.filter(producto => {
-            const descripcion = producto.descripcion_corta.toLowerCase();
-            const coincideTexto = descripcion.includes(filtroTexto);
-            const coincideCategoria = filtroCategoria === "todas" || producto.categoria === filtroCategoria;
-            return coincideTexto && coincideCategoria;
-        });
-
-        if (filtroPrecio !== "default") {
-            productosFiltrados.sort((a, b) => {
-                const precioA = parseFloat(a.precio.replace("$", ""));
-                const precioB = parseFloat(b.precio.replace("$", ""));
-                return filtroPrecio === "asc" ? precioA - precioB : precioB - precioA;
+            const productosFiltrados = productos.filter(producto => {
+                const descripcion = producto.descripcion_corta.toLowerCase();
+                const coincideTexto = descripcion.includes(filtroTexto);
+                const coincideCategoria = filtroCategoria === "todas" || producto.categoria === filtroCategoria;
+                return coincideTexto && coincideCategoria;
             });
-        }
 
-        contenedor.innerHTML = "";
-        productosFiltrados.forEach(producto => {
-            const productoHTML = `
-                <div class="producto">
-                    <div class="producto__imagen-contenedor">
-                        <img class="producto__imagen" src="${producto.imagen}" title="${producto.descripcion_corta}" alt="${producto.descripcion_corta}" loading="lazy">
-                        <div class="producto__overlay">
-                            <div class="producto__icono" onclick="window.open('${producto.enlace}', '_blank')">🔗</div>
+            if (filtroPrecio !== "default") {
+                productosFiltrados.sort((a, b) => {
+                    const precioA = parseFloat(a.precio.replace("$", ""));
+                    const precioB = parseFloat(b.precio.replace("$", ""));
+                    return filtroPrecio === "asc" ? precioA - precioB : precioB - precioA;
+                });
+            }
+
+            contenedor.innerHTML = "";
+            productosFiltrados.forEach(producto => {
+                const productoHTML = `
+                    <div class="producto">
+                        <div class="producto__imagen-contenedor">
+                            <img class="producto__imagen" src="${producto.imagen}" title="${producto.descripcion_corta}" alt="${producto.descripcion_corta}" loading="lazy">
+                            <div class="producto__overlay">
+                                <div class="producto__icono" onclick="window.open('${producto.enlace}', '_blank')">🔗</div>
+                            </div>
+                        </div>
+                        <div class="producto__info">
+                            <p class="producto__precio">${producto.precio}</p>
+                            <p class="producto__descripcion corta" data-corta="${producto.descripcion_corta}" data-larga="${producto.descripcion_larga}">
+                                <span class="texto-descripcion">${producto.descripcion_corta}</span>
+                                <button class="toggle-descripcion"> Ver más</button>
+                            </p>
+                            <button class="agregar-carrito" data-id="${producto.id}">Agregar al carrito</button>
                         </div>
                     </div>
-                    <div class="producto__info">
-                        <p class="producto__precio">${producto.precio}</p>
-                        <p class="producto__descripcion corta" data-corta="${producto.descripcion_corta}" data-larga="${producto.descripcion_larga}">
-                            <span class="texto-descripcion">${producto.descripcion_corta}</span>
-                            <button class="toggle-descripcion"> Ver más</button>
-                        </p>
-                        <button class="agregar-carrito" data-id="${producto.id}">Agregar al carrito</button>
-                    </div>
-                </div>
-            `;
-            contenedor.insertAdjacentHTML('beforeend', productoHTML);
+                `;
+                contenedor.insertAdjacentHTML('beforeend', productoHTML);
+            });
+
+            contenedor.querySelectorAll(".producto__imagen").forEach(img => {
+                img.addEventListener("load", () => img.classList.add("loaded"));
+            });
+
+            const productosVisibles = productosFiltrados.length;
+            totalProductosVisibles += productosVisibles;
+
+            seccion.style.display = productosVisibles > 0 ? "block" : "none";
         });
 
-        contenedor.querySelectorAll(".producto__imagen").forEach(img => {
-            img.addEventListener("load", () => img.classList.add("loaded"));
-        });
-
-        const productosVisibles = productosFiltrados.length;
-        totalProductosVisibles += productosVisibles;
-
-        seccion.style.display = productosVisibles > 0 ? "block" : "none";
-    });
-
-    mensajeNoProductos.textContent = "No se encontraron productos.";
-    mensajeNoProductos.style.display = totalProductosVisibles > 0 ? "none" : "block";
-    
+        mensajeNoProductos.textContent = "No se encontraron productos.";
+        mensajeNoProductos.style.display = totalProductosVisibles > 0 ? "none" : "block";
+        
+    } catch (error) {
+        console.error(" Error al filtrar productos:", error);
+    }
 }
 
-
+// Agregar función al ámbito global
+window.filtrarProductos = filtrarProductos;
 
 // FUNCIONES DEL CARRITO
 
@@ -479,16 +469,6 @@ function verificarAlmacenamientoLocal() {
         }
         const porcentajeUsado = (usedStorage / totalStorage) * 100;
         const espacioLibre = totalStorage - usedStorage;
-        console.log(`
-    📦 Estado de Almacenamiento Local:
-    - Espacio Total: ${(totalStorage / 1024 / 1024).toFixed(2)} MB
-    - Espacio Usado: ${(usedStorage / 1024 / 1024).toFixed(2)} MB
-    - Porcentaje Usado: ${porcentajeUsado.toFixed(2)}%
-    - Espacio Libre: ${(espacioLibre / 1024 / 1024).toFixed(2)} MB
-        `);
-        if (porcentajeUsado > 80) {
-            console.warn(" ⚠️ Almacenamiento Local casi lleno. Considere limpiar datos.");
-        }
         return {
             total: totalStorage,
             usado: usedStorage,
