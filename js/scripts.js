@@ -1,24 +1,6 @@
 
-//animacion de carga
-
-document.addEventListener("DOMContentLoaded", () => {
-  const elementos = document.querySelectorAll(".animado");
-
-  const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-          if (entry.isIntersecting) {
-              entry.target.classList.add("mostrar");
-              observer.unobserve(entry.target); 
-          }
-      });
-  }, { threshold: 0.2 });
-
-  elementos.forEach(el => observer.observe(el));
-});
-
-
 //logo cambiar tema
-let colores = ["color1", "color2", "color3"];
+let colores = ["color1", "color2"];
 let index = localStorage.getItem("colorIndex") ? parseInt(localStorage.getItem("colorIndex")) : 0;
 
 document.body.classList.add(colores[index]);
