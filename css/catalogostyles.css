@@ -41,9 +41,9 @@
 }
 
 .select-container select {
-    appearance: none;
-    -webkit-appearance: none;
     -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
     cursor: pointer;
 
 }
@@ -58,6 +58,7 @@
     pointer-events: none; 
 text-shadow: 0px 0px 9px var(--color-secundario);
 background-color:  var(--fondo-translucido);
+-webkit-backdrop-filter: blur(5px);
 backdrop-filter: blur(5px);
 }
 
@@ -66,6 +67,7 @@ backdrop-filter: blur(5px);
 #buscador {
     flex-grow: 3;
     background-color: var(--fondo-translucido);
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     border: 1px solid var(--color-principal);
     color:  var(--color-secundario);
@@ -78,6 +80,7 @@ backdrop-filter: blur(5px);
 #filtro-precio, #filtro-categoria {
     flex-grow: 1;
     background-color: var(--fondo-translucido) ;
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
     color: var(--color-texto);
     border: 1px solid var(--color-principal);
@@ -153,6 +156,7 @@ background-color:#000;
     flex: 0 0 calc(20% - 15px);
     height: auto;
     background-color: var(--fondo-translucido);
+    -webkit-backdrop-filter: blur(7px);
     backdrop-filter: blur(7px);
     display: flex;
     align-items: start;
@@ -291,6 +295,7 @@ background-color:#000;
     padding: 0px 12px;
     letter-spacing: 1px;
     padding-bottom: 10px;
+    -webkit-hyphens: auto;
     hyphens: auto;
 }
 
@@ -361,6 +366,7 @@ background-color:#000;
     top: 50%;
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(7px);
     backdrop-filter: blur(7px);
     color: var(--color-principal);
     border: 1px solid var(--color-principal);
@@ -437,6 +443,9 @@ background-color:#000;
 #productos3 .producto::before {
     background: linear-gradient(90deg, transparent, #00ffff10, transparent);
 }
+#productos3 .contador-circulo {
+    background-color: #0ff;
+}
 /* PAGINA CARRITO*/
 
 
@@ -444,6 +453,7 @@ background-color:#000;
 {
     width: 90%;
     background-color: var(--fondo-translucido);
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px); 
     margin: auto;
     text-align: center;

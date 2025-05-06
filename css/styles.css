@@ -294,7 +294,7 @@ h2 {
 @media (hover:hover) {
     .header__title:hover,
     .header__subtitle:hover {
-        transform: scale(1.2);
+        transform: scale(1.1);
     }
 }
 .header__title:active,
