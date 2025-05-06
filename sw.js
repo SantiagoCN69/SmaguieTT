@@ -1,4 +1,4 @@
-const CACHE_NAME = "mi-tienda-cache-v101";
+const CACHE_NAME = "mi-tienda-cache-v102";
 const URLS_A_CACHEAR = [
   "/",
   "/index.html",
@@ -67,14 +67,3 @@ self.addEventListener("activate", (event) => {
   );
   self.clients.claim();
 });
-
-
-
-// self.addEventListener("push", (event) => {
- // const data = event.data.json();
- // self.registration.showNotification(data.title, {
-//      body: data.message,
- //     icon: "/icono.png"
- //// });
-//});
-//

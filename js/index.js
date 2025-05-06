@@ -50,13 +50,16 @@ function cerrarBanner() {
 
 //  Swiper 1 - imagenes principales
 var swiper1 = new Swiper(".swiper1", {
-    loop:true,
+    loop: true,
+    autoplay: {
+        delay: 3000, 
+        disableOnInteraction: false
+    },
     effect: 'fade',
     navigation: {
         nextEl: ".next1",
         prevEl: ".prev1"
     },
-
 });
 
   //  Swiper 2 - productos tendencia
