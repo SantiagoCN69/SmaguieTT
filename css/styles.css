@@ -335,7 +335,7 @@ h2 {
 
 
 .header__menu-link:hover {
-    opacity: .8;
+    transform: scale(1.05);
 }
 
 

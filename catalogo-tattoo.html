@@ -17,6 +17,47 @@
         
         </script>
         <link rel="manifest" href="/manifest.json">
+        <STYLE>
+            /*rebornnnn cateogira*/
+            .categoria3 h2{
+                color: #0ff;
+            }
+            .Rebornboton {
+                color: #0ff;
+                border: 1px solid #0ff;
+            }
+            #productos3 .producto__info {
+                border-top: 2px solid #0ff;
+            }
+            
+            #productos3 .agregar-carrito {
+                background-color: #0ff;
+                color: black;
+            }
+            
+            #productos3 .producto__precio {
+                color: #0ff;
+            }
+            #productos3 .toggle-descripcion {
+                color: #0ff;
+            }
+            .categoria3 .categoria__btn:hover {
+                box-shadow: 0px 0px 10px #0ff;
+            }
+            #productos3 .agregar-carrito:hover{
+                box-shadow: 0px 0px 8px #0ff;
+                outline: 1px solid #0ff;
+            }
+            #productos3 .producto:hover {
+                box-shadow: 0 0 5px #0ff;
+            }
+            #productos3 .producto::before {
+                background: linear-gradient(90deg, transparent, #00ffff10, transparent);
+            }
+            #productos3 .contador-circulo {
+                background-color: #0ff;
+            }
+            </STYLE>
 </head>
 <body>
     <header class="header">
@@ -38,10 +79,10 @@
         <nav class="header__nav">
             <ul class="header__menu"> 
                 <li class="header__menu-item">
-                    <a href="index.html" class="header__menu-link">Principal</a>
+                    <a href="catalogo-piercing.html" class="header__menu-link">Catálogo Piercing</a>
                 </li>
                 <li class="header__menu-item">
-                    <a href="catalogo-piercing.html" class="header__menu-link">Catálogo Piercing</a>
+                    <a href="index.html" class="header__menu-link">Principal</a>
                 </li>
                 <li class="header__menu-item">
                     <a href="Contacto.html" class="header__menu-link">Contáctanos</a>
@@ -55,7 +96,7 @@
     </header>
     
     <hr class="Medium">
-
+    <h2 class="title">CATÁLOGO TATTOO</h2>
     <div class="filtros">
     
         <input type="text" id="buscador" placeholder="Buscar productos..." oninput="filtrarProductos()">

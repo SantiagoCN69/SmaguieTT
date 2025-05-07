@@ -38,6 +38,9 @@
         <nav class="header__nav">
             <ul class="header__menu"> 
                 <li class="header__menu-item">
+                    <a href="catalogo-tattoo.html" class="header__menu-link">Catálogo Tattoo</a>
+                </li>
+                <li class="header__menu-item">
                     <a href="index.html" class="header__menu-link">Principal</a>
                 </li>
                 <li class="header__menu-item">
@@ -52,7 +55,7 @@
     </header>
 
     <hr class="Medium">
-
+    <h2 class="title">CATÁLOGO PIERCING</h2>
     <div class="filtros">
     
         <input type="text" id="buscador" placeholder="Buscar productos..." oninput="filtrarProductos()">
@@ -67,8 +70,8 @@
         <div class="select-container">
             <select title="Filtrar por categoría" id="filtro-categoria" onchange="filtrarProductos()">
                 <option value="todas">Todas las categorías</option>
-                <option value="categoria1">x</option>
-                <option value="categoria2">x</option>
+                <option value="categoria1">LABRET-S Basico</option>
+                <option value="categoria2">LABRET-S Premium</option>
                 <option value="categoria3">x</option>
                 <option value="categoria4">x</option>
                 <option value="categoria5">x</option>
@@ -86,7 +89,7 @@
 </div></a>
 
     <section class="categoria categoria1 ">
-        <h2 class="categoria__titulo">x</h2>
+        <h2 class="categoria__titulo">LABRET-S Basico</h2>
         <div class="categoria__contenedor">
             <button class="categoria__btn categoria__btn--prev" data-action="prev" data-target="productos1">&#10094;</button>
             <div class="categoria__productos" id="productos1"></div>
@@ -95,7 +98,7 @@
     </section>
     
     <section class="categoria categoria2 ">
-        <h2 class="categoria__titulo">x</h2>
+        <h2 class="categoria__titulo">LABRET-S Premium</h2>
         <div class="categoria__contenedor">
             <button class="categoria__btn categoria__btn--prev" data-action="prev" data-target="productos2">&#10094;</button>
             <div class="categoria__productos" id="productos2"></div>
@@ -197,7 +200,7 @@
     </footer>
 
     <script src="/js/scripts.js"></script>
-    <script type="module" src="js/catalogo.js"></script>
+    <script type="module" src="js/catalogo-piercing.js"></script>
 
 </body>
 </html>
