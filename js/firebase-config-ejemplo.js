@@ -11,8 +11,3 @@ const firebaseConfig = {
 };
 
 export default firebaseConfig;
-
-// Instrucciones:
-// 1. Copia este archivo y renómbralo a firebase-config.js
-// 2. Reemplaza todos los valores con tus credenciales de Firebase
-// 3. Asegúrate de agregar firebase-config.js a tu .gitignore para no exponer tus credenciales

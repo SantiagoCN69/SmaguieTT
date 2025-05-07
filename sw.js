@@ -2,7 +2,7 @@ const CACHE_NAME = "mi-tienda-cache-v102";
 const URLS_A_CACHEAR = [
   "/",
   "/index.html",
-  "/catalogo.html",
+  "/catalogo-tattoo.html",
   "/carrito.html",
   "/css/styles.css",
   "/js/scripts.js",
