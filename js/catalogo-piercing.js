@@ -347,7 +347,8 @@ function filtrarProductos() {
 
             const productosFiltrados = productos.filter(producto => {
                 const descripcion = producto.descripcion_corta.toLowerCase();
-                const coincideTexto = descripcion.includes(filtroTexto);
+                const descirpcionlarga = producto.descripcion_larga.toLowerCase();
+                const coincideTexto = descripcion.includes(filtroTexto) || descirpcionlarga.includes(filtroTexto);
                 const coincideCategoria = filtroCategoria === "todas" || producto.categoria === filtroCategoria;
                 return coincideTexto && coincideCategoria;
             });
