@@ -190,54 +190,21 @@ function actualizarEstadoUltimaCompra() {
 
 
 
-// Modal para volver al catálogo
-document.addEventListener("DOMContentLoaded", () => {
-    const botonVolverCatalogo = document.getElementById("volver-catalogo");
 
-    if (botonVolverCatalogo) {
-        // Crear el modal
-        const modal = document.createElement("div");
-        modal.id = "modal-catalogo";
-   
-        const modalContent = document.createElement("div");
-        modalContent.id = "modal-content";
-        const botonTattoo = document.createElement("button");
-        botonTattoo.textContent = "Catálogo Tattoo";
-        const botonPiercing = document.createElement("button");
-        botonPiercing.textContent = "Catálogo Piercing";
+document.addEventListener('DOMContentLoaded', function() {
 
-        modalContent.appendChild(botonTattoo);
-        modalContent.appendChild(botonPiercing);
-        modal.appendChild(modalContent);
-        document.body.appendChild(modal);
+  const botonVolverCatalogo = document.getElementById('volver-catalogo');
+  const modalCatalogo = document.getElementById('modal-catalogo');
 
-        // Evento para mostrar el modal
-        botonVolverCatalogo.addEventListener("click", (event) => {
-            event.preventDefault(); // Prevenir la navegación si es un enlace
-            modal.style.display = "block";
-        });
+  if (botonVolverCatalogo && modalCatalogo) {
+    botonVolverCatalogo.addEventListener('click', function() {
+      modalCatalogo.style.display = 'block'; 
+    });
 
-        // Evento para cerrar el modal si se hace clic fuera del contenido
-        window.addEventListener("click", (event) => {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        });
-
-        // Evento para cerrar el modal al hacer scroll
-        window.addEventListener("scroll", () => {
-            if (modal.style.display !== "none") {
-                modal.style.display = "none";
-            }
-        });
-
-        // Eventos para los botones del modal
-        botonTattoo.addEventListener("click", () => {
-            window.location.href = "catalogo-tattoo.html";
-        });
-
-        botonPiercing.addEventListener("click", () => {
-            window.location.href = "catalogo-piercing.html";
-        });
-    }
+    modalCatalogo.addEventListener('click', function(event) {
+      if (event.target === modalCatalogo) {
+        modalCatalogo.style.display = 'none';
+      }
+    });
+  } 
 });
