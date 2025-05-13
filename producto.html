@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Producto - SmaguieTT</title>
+    <link rel="icon" type="image/png" href="/imagenes/logocirculo.png">
+    <link rel="apple-touch-icon" href="/imagenes/logocirculo.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/producto.css">
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <link rel="manifest" href="/manifest.json">
+</head>
+<body>
+    <header class="header">
+        <div class="header__logo">
+            <img src="/imagenes/logo.jpg" alt="Studio MaguieTT - Logo" class="header__logo-img" loading="lazy">
+            <div class="header__theme-toggle" onclick="cambiarColor()" title="cambiar paleta de colores">
+                <img src="/imagenes/icono/color.png" alt="cambiar de color" class="header__theme-icon">
+            </div>
+        </div>
+        <div class="header__titles">
+            <h1 class="header__title">SMAGUIETT</h1>
+            <h2 class="header__subtitle">Studio Maguie Tattoo.</h2>
+        </div>
+        <div class="header__menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="header__nav">
+            <ul class="header__menu"> 
+                <li class="header__menu-item">
+                    <a href="catalogo-tattoo.html" class="header__menu-link">Catálogo Tattoo</a>
+                </li>
+                <li class="header__menu-item">
+                    <a href="catalogo-piercing.html" class="header__menu-link">Catálogo Piercing</a>
+                </li>
+                <li class="header__menu-item">
+                    <a href="contacto.html" class="header__menu-link">Contáctanos</a>
+                </li>
+                <li class="header__menu-item">
+                    <a href="ubicacion.html" class="header__menu-link">Ubicación</a>
+                </li>
+            </ul>
+        </nav>
+        
+    </header>
+    
+    <hr class="Medium">
+    <nav class="navegacion">
+        <a href="catalogo-piercing.html" class="navegacion__link">← Volver al Catálogo</a>
+    </nav>
+
+    <main class="producto-detalle">
+        <div class="producto-detalle__loading">
+            <div class="loader"></div>
+            <p>Cargando producto...</p>
+        </div>
+        <div class="producto-detalle__contenedor">
+            <div class="producto-detalle__imagen-contenedor">
+                <img id="producto-imagen" class="producto-detalle__imagen" src="" alt="" loading="lazy">
+            </div>
+            <div class="producto-detalle__info">
+                <h1 id="producto-titulo" class="producto-detalle__titulo"></h1>
+                <p id="producto-precio" class="producto-detalle__precio"></p>
+                <div class="producto-detalle__descripcion">
+                    <p id="producto-descripcion"></p>
+                </div>
+                <button id="agregar-carrito" class="btn-agregar-carrito">
+                    Agregar al Carrito
+                </button>
+                <div class="producto-detalle__caracteristicas">
+                    <h2>Características</h2>
+                    <ul id="producto-caracteristicas"></ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 SmaguieTT - Studio Maguie Tattoo</p>
+    </footer>
+    <script type="module" src="js/producto.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
