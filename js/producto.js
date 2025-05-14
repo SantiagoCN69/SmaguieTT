@@ -140,7 +140,22 @@ function mostrarProducto(producto, origen) {
     } else {
         seccionCaracteristicas.style.display = 'none';
     }
-    console.log('ID del producto:', producto.id);
+
+    // Actualizar variantes
+    const variantes = document.getElementById('producto-variantes');
+    const seccionVariantes = document.querySelector('.producto-detalle__variantes');
+    variantes.innerHTML = '';
+
+    if (producto.variantes && producto.variantes.length > 0) {
+        producto.variantes.forEach(variante => {
+            const li = document.createElement('li');
+            li.textContent = variante;
+            variantes.appendChild(li);
+        });
+        seccionVariantes.style.display = 'block';
+    } else {
+        seccionVariantes.style.display = 'none';
+    }
     // Configurar botón de comprar ya
     const btnComprarYa = document.getElementById('comprar-ya');
     if (producto.enlace) {
