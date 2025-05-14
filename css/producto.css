@@ -73,13 +73,8 @@
     width: 80%;
     object-fit: contain;
     margin: auto;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: transform 0.3s ease;
     filter: drop-shadow(0px 0px 1px var(--color-principal));
-    opacity: 1;
-}
-
-.producto-detalle__imagen.changing {
-    opacity: 0;
 }
 
 .producto-detalle__imagen:hover {

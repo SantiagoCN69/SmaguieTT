@@ -155,27 +155,16 @@ function mostrarProducto(producto, origen) {
             const li = document.createElement('li');
             li.textContent = nombre;
 
-            // Función para cambiar la imagen con animación
-            const cambiarImagen = (nuevaUrl) => {
-                imagenPrincipal.classList.add('changing');
-                setTimeout(() => {
-                    imagenPrincipal.src = nuevaUrl;
-                    setTimeout(() => {
-                        imagenPrincipal.classList.remove('changing');
-                    }, 50);
-                }, 300);
-            };
-
             // Eventos para cambiar la imagen
             li.addEventListener('mouseenter', () => {
                 if (imagenUrl && !li.classList.contains('active')) {
-                    cambiarImagen(imagenUrl);
+                    imagenPrincipal.src = imagenUrl;
                 }
             });
 
             li.addEventListener('mouseleave', () => {
                 if (!li.classList.contains('active')) {
-                    cambiarImagen(imagenOriginal);
+                    imagenPrincipal.src = imagenOriginal;
                 }
             });
 
@@ -191,7 +180,7 @@ function mostrarProducto(producto, origen) {
                     li.classList.add('active');
                     if (imagenUrl) {
                         imagenOriginal = imagenUrl;
-                        cambiarImagen(imagenUrl);
+                        imagenPrincipal.src = imagenUrl;
                     }
                     // Actualizar el enlace del botón comprar ya
                     if (producto.enlace) {
@@ -202,7 +191,7 @@ function mostrarProducto(producto, origen) {
                     }
                 } else {
                     // Desactivar la variante
-                    cambiarImagen(producto.imagen); // Volver a la imagen original del producto
+                    imagenPrincipal.src = producto.imagen; // Volver a la imagen original del producto
                     imagenOriginal = producto.imagen;
                     // Restaurar el enlace original
                     if (producto.enlace) {
