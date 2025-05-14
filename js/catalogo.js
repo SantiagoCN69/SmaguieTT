@@ -26,30 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 document.addEventListener("click", (event) => {
-    if (event.target.classList.contains("toggle-descripcion")) {
-        const descripcion = event.target.closest(".producto__descripcion");
-        if (descripcion) {
-            if (descripcion.classList.contains("corta")) {
-                descripcion.classList.remove("corta");
-                event.target.textContent = " Ver menos";
-                descripcion.querySelector(".texto-descripcion").textContent = descripcion.getAttribute("data-larga");
-            } else {
-                descripcion.classList.add("corta");
-                event.target.textContent = " Ver más";
-                descripcion.querySelector(".texto-descripcion").textContent = descripcion.getAttribute("data-corta");
-            }
-        }
-        event.stopPropagation();
-    } 
-    
-    else if (event.target.classList.contains("agregar-carrito")) {
+    if (event.target.classList.contains("agregar-carrito")) {
         event.preventDefault();
         const productoId = event.target.getAttribute("data-id");
         agregarAlCarrito(productoId);
-    }
-    
-    else if (!event.target.closest(".producto__descripcion")) {
-        cerrarDescripciones();
     }
 
     const scrollButton = event.target.closest('.categoria__btn');
@@ -283,9 +263,9 @@ function crearArticuloHTML(producto) {
             </div>
             <div class="producto__info">
                 <p class="producto__precio producto-link" data-id="${producto.descripcion_corta}">${producto.precio}</p>
-                <p class="producto__descripcion corta" data-corta="${producto.descripcion_corta}" data-larga="${producto.descripcion_larga}">
+                <p class="producto__descripcion corta">
                     <span class="texto-descripcion producto-link" data-id="${producto.descripcion_corta}">${producto.descripcion_corta}</span>
-                    <button class="toggle-descripcion"> Ver más</button>
+                    <button class="toggle-descripcion producto-link" data-id="${producto.descripcion_corta}"> Ver más</button>
                 </p>
                 <button class="agregar-carrito" data-id="${producto.id}">Agregar al carrito</button>
             </div>
@@ -307,18 +287,6 @@ function renderizarEnContenedor(contenedor, productos) {
             const descripcion = el.dataset.id;
             // encodeURIComponent para URL seguras
             window.location.href = `producto.html?id=${encodeURIComponent(descripcion)}`;
-        });
-    });
-    contenedor.querySelectorAll('.toggle-descripcion').forEach(boton => {
-        boton.addEventListener('click', e => {
-            e.stopPropagation();
-            const descripcion = boton.closest('.producto__descripcion');
-            const esCorta = descripcion.classList.toggle('corta');
-            boton.textContent = esCorta ? ' Ver más' : ' Ver menos';
-            const nuevaDescripcion = esCorta
-                ? descripcion.getAttribute('data-corta')
-                : descripcion.getAttribute('data-larga');
-            descripcion.querySelector('.texto-descripcion').textContent = nuevaDescripcion;
         });
     });
 

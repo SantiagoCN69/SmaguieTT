@@ -30,6 +30,29 @@ function obtenerIdProducto() {
     return params.get('id');
 }
 
+// Función para volver al catálogo apropiado
+function volverAlCatalogo() {
+    const referrer = document.referrer;
+    if (referrer.includes('catalogo-piercing.html')) {
+        window.location.href = 'catalogo-piercing.html';
+    } else if (referrer.includes('catalogo-tattoo.html')) {
+        window.location.href = 'catalogo-tattoo.html';
+    } else {
+        window.location.href = 'index.html';
+    }
+}
+
+// Configurar el botón de volver
+document.addEventListener('DOMContentLoaded', () => {
+    const btnVolver = document.getElementById('btn-volver');
+    if (btnVolver) {
+        btnVolver.addEventListener('click', (e) => {
+            e.preventDefault();
+            volverAlCatalogo();
+        });
+    }
+});
+
 // Cargar datos del producto
 async function cargarProducto() {
     try {
@@ -106,10 +129,12 @@ function mostrarProducto(producto, origen) {
     const caracteristicas = document.getElementById('producto-caracteristicas');
     caracteristicas.innerHTML = '';
 
-    if (producto.categoria) {
-        const li = document.createElement('li');
-        li.textContent = `Categoría: ${producto.categoria}`;
-        caracteristicas.appendChild(li);
+    if (producto.caracteristicas) {
+        producto.caracteristicas.forEach(caracteristica => {
+            const li = document.createElement('li');
+            li.textContent = caracteristica;
+            caracteristicas.appendChild(li);
+        });
     }
     console.log('ID del producto:', producto.id);
     // Configurar botón de agregar al carrito
