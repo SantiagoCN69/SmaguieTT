@@ -197,7 +197,7 @@ function mostrarProducto(producto, origen) {
                     if (producto.enlace) {
                         const btnComprarYa = document.getElementById('comprar-ya');
                         btnComprarYa.addEventListener('click', () => {
-                            window.open(enlaceBase + ' ' + nombre);
+                            window.open(enlaceBase + ' ' + nombre, '_blank' );
                         }, { once: true });
                     }
                 } else {
@@ -208,7 +208,7 @@ function mostrarProducto(producto, origen) {
                     if (producto.enlace) {
                         const btnComprarYa = document.getElementById('comprar-ya');
                         btnComprarYa.addEventListener('click', () => {
-                            window.open(enlaceBase);
+                            window.open(enlaceBase, '_blank');
                         }, { once: true });
                     }
                 }
