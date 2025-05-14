@@ -147,23 +147,70 @@ function mostrarProducto(producto, origen) {
     variantes.innerHTML = '';
 
     let enlaceBase = producto.enlace || '';
-    if (producto.variantes && producto.variantes.length > 0) {
-        producto.variantes.forEach(variante => {
+    const imagenPrincipal = document.getElementById('producto-imagen');
+    let imagenOriginal = imagenPrincipal.src;
+
+    if (producto.variantes && Object.keys(producto.variantes).length > 0) {
+        Object.entries(producto.variantes).forEach(([nombre, imagenUrl]) => {
             const li = document.createElement('li');
-            li.textContent = variante;
+            li.textContent = nombre;
+
+            // Función para cambiar la imagen con animación
+            const cambiarImagen = (nuevaUrl) => {
+                imagenPrincipal.classList.add('changing');
+                setTimeout(() => {
+                    imagenPrincipal.src = nuevaUrl;
+                    setTimeout(() => {
+                        imagenPrincipal.classList.remove('changing');
+                    }, 50);
+                }, 300);
+            };
+
+            // Eventos para cambiar la imagen
+            li.addEventListener('mouseenter', () => {
+                if (imagenUrl && !li.classList.contains('active')) {
+                    cambiarImagen(imagenUrl);
+                }
+            });
+
+            li.addEventListener('mouseleave', () => {
+                if (!li.classList.contains('active')) {
+                    cambiarImagen(imagenOriginal);
+                }
+            });
+
             li.addEventListener('click', () => {
+                const wasActive = li.classList.contains('active');
                 // Remover active de todos los li
                 variantes.querySelectorAll('li').forEach(item => {
                     item.classList.remove('active');
                 });
-                // Agregar active al seleccionado
-                li.classList.add('active');
-                // Actualizar el enlace del botón comprar ya
-                if (producto.enlace) {
-                    const btnComprarYa = document.getElementById('comprar-ya');
-                    btnComprarYa.addEventListener('click', () => {
-                        window.open(enlaceBase + ' ' + variante);
-                    }, { once: true });
+
+                if (!wasActive) {
+                    // Activar la variante
+                    li.classList.add('active');
+                    if (imagenUrl) {
+                        imagenOriginal = imagenUrl;
+                        cambiarImagen(imagenUrl);
+                    }
+                    // Actualizar el enlace del botón comprar ya
+                    if (producto.enlace) {
+                        const btnComprarYa = document.getElementById('comprar-ya');
+                        btnComprarYa.addEventListener('click', () => {
+                            window.open(enlaceBase + ' ' + nombre);
+                        }, { once: true });
+                    }
+                } else {
+                    // Desactivar la variante
+                    cambiarImagen(producto.imagen); // Volver a la imagen original del producto
+                    imagenOriginal = producto.imagen;
+                    // Restaurar el enlace original
+                    if (producto.enlace) {
+                        const btnComprarYa = document.getElementById('comprar-ya');
+                        btnComprarYa.addEventListener('click', () => {
+                            window.open(enlaceBase);
+                        }, { once: true });
+                    }
                 }
             });
             variantes.appendChild(li);
