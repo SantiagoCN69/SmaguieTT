@@ -172,6 +172,7 @@ async function probarConexionFirestore(db) {
     }
 }
 
+
 // Cargar productos
 async function cargarProductos() {
     try {
@@ -263,144 +264,143 @@ function compararProductos(a, b) {
     return idA.subnivel.localeCompare(idB.subnivel);
 }
 
-function renderizarProductos(productos) {
-    const categorias = [
-        { id: "productos1", key: "categoria1" },
-        { id: "productos2", key: "categoria2" },
-        { id: "productos3", key: "categoria3" },
-        { id: "productos4", key: "categoria4" },
-        { id: "productos5", key: "categoria5" },
-        { id: "productos6", key: "categoria6" },
-        { id: "productos7", key: "categoria7" },
-        { id: "productos8", key: "categoria8" }
-    ];
+//constantes globales
+const CATEGORIAS = [
+    { id: "productos1", key: "categoria1" },
+    { id: "productos2", key: "categoria2" },
+    { id: "productos3", key: "categoria3" },
+    { id: "productos4", key: "categoria4" },
+    { id: "productos5", key: "categoria5" },
+    { id: "productos6", key: "categoria6" },
+    { id: "productos7", key: "categoria7" },
+    { id: "productos8", key: "categoria8" }
+];
 
-    let totalProductosVisibles = 0;
+function crearArticuloHTML(producto) {
+    return `
+        <article class="producto" data-id="${producto.descripcion_corta}">
+            <div class="producto__imagen-contenedor producto-link" data-id="${producto.descripcion_corta}">
+                <img class="producto__imagen" src="${producto.imagen}" title="${producto.descripcion_corta}" alt="${producto.descripcion_corta}" loading="lazy">
+            </div>
+            <div class="producto__info">
+                <p class="producto__precio producto-link" data-id="${producto.descripcion_corta}">${producto.precio}</p>
+                <p class="producto__descripcion corta" data-corta="${producto.descripcion_corta}" data-larga="${producto.descripcion_larga}">
+                    <span class="texto-descripcion producto-link" data-id="${producto.descripcion_corta}">${producto.descripcion_corta}</span>
+                    <button class="toggle-descripcion"> Ver más</button>
+                </p>
+                <button class="agregar-carrito" data-id="${producto.id}">Agregar al carrito</button>
+            </div>
+        </article>
+    `;
+}
 
-    categorias.forEach(({ id, key }) => {
-        const contenedor = document.getElementById(id);
-        const seccion = document.querySelector(`.${key}`);
-        const productosFiltrados = productos.filter(producto => producto.categoria === key);
+function renderizarEnContenedor(contenedor, productos) {
+    contenedor.innerHTML = "";
 
-        contenedor.innerHTML = "";
-        productosFiltrados.forEach(producto => {
-            const productoHTML = `
-                <div class="producto">
-                    <div class="producto__imagen-contenedor">
-                        <img class="producto__imagen" src="${producto.imagen}" title="${producto.descripcion_corta}" alt="${producto.descripcion_corta}" loading="lazy">
-                        <div class="producto__overlay">
-                            <div class="producto__icono" onclick="window.open('${producto.enlace}', '_blank')">🔗</div>
-                        </div>
-                    </div>
-                    <div class="producto__info">
-                        <p class="producto__precio">${producto.precio}</p>
-                        <p class="producto__descripcion corta" data-corta="${producto.descripcion_corta}" data-larga="${producto.descripcion_larga}">
-                            <span class="texto-descripcion">${producto.descripcion_corta}</span>
-                            <button class="toggle-descripcion"> Ver más</button>
-                        </p>
-                        <button class="agregar-carrito" data-id="${producto.id}">Agregar al carrito</button>
-                    </div>
-                </div>
-            `;
-            contenedor.insertAdjacentHTML('beforeend', productoHTML);
-        });
-
-        contenedor.querySelectorAll(".producto__imagen").forEach(img => {
-            img.addEventListener("load", () => img.classList.add("loaded"));
-        });
-
-        const productosVisibles = productosFiltrados.length;
-        totalProductosVisibles += productosVisibles;
-
-        seccion.style.display = productosVisibles > 0 ? "block" : "none";
+    productos.forEach(producto => {
+        const productoHTML = crearArticuloHTML(producto);
+        contenedor.insertAdjacentHTML('beforeend', productoHTML);
     });
 
-    const mensajeNoProductos = document.getElementById("mensaje-no-productos");
-    mensajeNoProductos.style.display = totalProductosVisibles > 0 ? "none" : "block";
+    contenedor.querySelectorAll('.producto-link').forEach(el => {
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', () => {
+            const descripcion = el.dataset.id;
+            // encodeURIComponent para URL seguras
+            window.location.href = `producto.html?id=${encodeURIComponent(descripcion)}`;
+        });
+    });
+    contenedor.querySelectorAll('.toggle-descripcion').forEach(boton => {
+        boton.addEventListener('click', e => {
+            e.stopPropagation();
+            const descripcion = boton.closest('.producto__descripcion');
+            const esCorta = descripcion.classList.toggle('corta');
+            boton.textContent = esCorta ? ' Ver más' : ' Ver menos';
+            const nuevaDescripcion = esCorta
+                ? descripcion.getAttribute('data-corta')
+                : descripcion.getAttribute('data-larga');
+            descripcion.querySelector('.texto-descripcion').textContent = nuevaDescripcion;
+        });
+    });
+
+    contenedor.querySelectorAll('.agregar-carrito').forEach(boton => {
+        boton.addEventListener('click', e => {
+            e.stopPropagation();
+            agregarAlCarrito(boton.dataset.id);
+        });
+    });
+
+    contenedor.querySelectorAll(".producto__imagen").forEach(img => {
+        img.addEventListener("load", () => img.classList.add("loaded"));
+    });
 }
+
+
+function renderizarProductos(productos) {
+    let totalVisibles = 0;
+
+    CATEGORIAS.forEach(({ id, key }) => {
+        const contenedor = document.getElementById(id);
+        const seccion = document.querySelector(`.${key}`);
+        const filtrados = productos.filter(p => p.categoria === key);
+
+        renderizarEnContenedor(contenedor, filtrados);
+
+        totalVisibles += filtrados.length;
+        seccion.style.display = filtrados.length > 0 ? "block" : "none";
+    });
+
+    document.getElementById("mensaje-no-productos").style.display = totalVisibles > 0 ? "none" : "block";
+}
+
 
 // Filtrar productos
 function filtrarProductos() {
     try {
-        const filtroTexto = document.getElementById("buscador").value.toLowerCase();
-        const filtroCategoria = document.getElementById("filtro-categoria").value;
-        const filtroPrecio = document.getElementById("filtro-precio").value;
+        const texto = document.getElementById("buscador").value.toLowerCase();
+        const categoriaFiltro = document.getElementById("filtro-categoria").value;
+        const precioFiltro = document.getElementById("filtro-precio").value;
         const mensajeNoProductos = document.getElementById("mensaje-no-productos");
 
-        const categorias = [
-            { id: "productos1", key: "categoria1" },
-            { id: "productos2", key: "categoria2" },
-            { id: "productos3", key: "categoria3" },
-            { id: "productos4", key: "categoria4" },
-            { id: "productos5", key: "categoria5" },
-            { id: "productos6", key: "categoria6" },
-            { id: "productos7", key: "categoria7" },
-            { id: "productos8", key: "categoria8" }
-        ];
+        let totalVisibles = 0;
 
-        let totalProductosVisibles = 0;
-
-        categorias.forEach(({ id, key }) => {
+        CATEGORIAS.forEach(({ id, key }) => {
             const contenedor = document.getElementById(id);
             const seccion = document.querySelector(`.${key}`);
-            const productos = productosGlobales.filter(producto => producto.categoria === key);
 
-            const productosFiltrados = productos.filter(producto => {
-                const descripcion = producto.descripcion_corta.toLowerCase();
-                const descirpcionlarga = producto.descripcion_larga.toLowerCase();
-                const coincideTexto = descripcion.includes(filtroTexto) || descirpcionlarga.includes(filtroTexto);
-                const coincideCategoria = filtroCategoria === "todas" || producto.categoria === filtroCategoria;
-                return coincideTexto && coincideCategoria;
+            let productos = productosGlobales.filter(p => p.categoria === key);
+
+            productos = productos.filter(p => {
+                const textoMatch =
+                    p.descripcion_corta.toLowerCase().includes(texto) ||
+                    p.descripcion_larga.toLowerCase().includes(texto);
+                const categoriaMatch =
+                    categoriaFiltro === "todas" || p.categoria === categoriaFiltro;
+                return textoMatch && categoriaMatch;
             });
 
-            if (filtroPrecio !== "default") {
-                productosFiltrados.sort((a, b) => {
-                    const precioA = parseFloat(a.precio.replace("$", ""));
-                    const precioB = parseFloat(b.precio.replace("$", ""));
-                    return filtroPrecio === "asc" ? precioA - precioB : precioB - precioA;
+            if (precioFiltro !== "default") {
+                productos.sort((a, b) => {
+                    const aPrecio = parseFloat(a.precio.replace("$", ""));
+                    const bPrecio = parseFloat(b.precio.replace("$", ""));
+                    return precioFiltro === "asc" ? aPrecio - bPrecio : bPrecio - aPrecio;
                 });
             }
 
-            contenedor.innerHTML = "";
-            productosFiltrados.forEach(producto => {
-                const productoHTML = `
-                    <div class="producto">
-                        <div class="producto__imagen-contenedor">
-                            <img class="producto__imagen" src="${producto.imagen}" title="${producto.descripcion_corta}" alt="${producto.descripcion_corta}" loading="lazy">
-                            <div class="producto__overlay">
-                                <div class="producto__icono" onclick="window.open('${producto.enlace}', '_blank')">🔗</div>
-                            </div>
-                        </div>
-                        <div class="producto__info">
-                            <p class="producto__precio">${producto.precio}</p>
-                            <p class="producto__descripcion corta" data-corta="${producto.descripcion_corta}" data-larga="${producto.descripcion_larga}">
-                                <span class="texto-descripcion">${producto.descripcion_corta}</span>
-                                <button class="toggle-descripcion"> Ver más</button>
-                            </p>
-                            <button class="agregar-carrito" data-id="${producto.id}">Agregar al carrito</button>
-                        </div>
-                    </div>
-                `;
-                contenedor.insertAdjacentHTML('beforeend', productoHTML);
-            });
+            renderizarEnContenedor(contenedor, productos);
 
-            contenedor.querySelectorAll(".producto__imagen").forEach(img => {
-                img.addEventListener("load", () => img.classList.add("loaded"));
-            });
-
-            const productosVisibles = productosFiltrados.length;
-            totalProductosVisibles += productosVisibles;
-
-            seccion.style.display = productosVisibles > 0 ? "block" : "none";
+            totalVisibles += productos.length;
+            seccion.style.display = productos.length > 0 ? "block" : "none";
         });
 
         mensajeNoProductos.textContent = "No se encontraron productos.";
-        mensajeNoProductos.style.display = totalProductosVisibles > 0 ? "none" : "block";
-        
+        mensajeNoProductos.style.display = totalVisibles > 0 ? "none" : "block";
+
     } catch (error) {
-        console.error(" Error al filtrar productos:", error);
+        console.error("Error al filtrar productos:", error);
     }
 }
+
 
 // Agregar función al ámbito global
 window.filtrarProductos = filtrarProductos;

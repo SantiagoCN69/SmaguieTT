@@ -50,6 +50,11 @@
     </header>
     
     <hr class="Medium">
+    <a href="carrito.html"><div id="carrito-container">
+    
+        🛒  <span id="contador-carrito">0</span>
+    
+</div></a>
     <nav class="navegacion">
         <a href="catalogo-piercing.html" class="navegacion__link">← Volver al Catálogo</a>
     </nav>
@@ -69,19 +74,43 @@
                 <div class="producto-detalle__descripcion">
                     <p id="producto-descripcion"></p>
                 </div>
-                <button id="agregar-carrito" class="btn-agregar-carrito">
-                    Agregar al Carrito
-                </button>
                 <div class="producto-detalle__caracteristicas">
                     <h2>Características</h2>
                     <ul id="producto-caracteristicas"></ul>
                 </div>
+                <button id="agregar-carrito" class="btn-agregar-carrito">
+                    Agregar al Carrito
+                </button>
             </div>
         </div>
     </main>
 
-    <footer class="footer">
-        <p>© 2025 SmaguieTT - Studio Maguie Tattoo</p>
+    <footer class="footer" id="contacto">
+        <nav class="footer__nav" aria-label="Redes sociales">
+            <ul class="footer__list">
+            <li class="footer__item">
+                <a href="https://wa.me/573053662867" target="_blank" rel="noopener" title="WhatsApp" class="footer__link footer__link--whatsapp" aria-label="Contáctanos por WhatsApp">
+                    <img src="/imagenes/icono/whatsapp.png" alt="WhatsApp" class="footer__icon" loading="lazy" width="24" height="24">
+                </a>
+            </li>
+            <li class="footer__item">
+                <a href="https://www.instagram.com/smaguiett/" target="_blank" rel="noopener" title="Instagram" class="footer__link footer__link--instagram" aria-label="Síguenos en Instagram">
+                    <img src="/imagenes/icono/instagram.png" alt="Instagram" class="footer__icon" loading="lazy" width="24" height="24">
+                </a>
+            </li>
+            <li class="footer__item">
+                <a href="https://www.facebook.com/smaguiett" target="_blank" rel="noopener" title="Facebook" class="footer__link footer__link--facebook" aria-label="Síguenos en Facebook">
+                    <img src="/imagenes/icono/facebook.png" alt="Facebook" class="footer__icon" loading="lazy" width="24" height="24">
+                </a>
+            </li>
+            <li class="footer__item">
+                <a href="https://www.tiktok.com/@smaguiett" target="_blank" rel="noopener" title="TikTok" class="footer__link footer__link--tiktok" aria-label="Síguenos en TikTok">
+                    <img src="/imagenes/icono/tiktok.png" alt="TikTok" class="footer__icon" loading="lazy" width="24" height="24">
+                </a>
+            </li>
+            </ul>
+        </nav>
+        <p class="footer__text">© 2025 SmaguieTT - Studio Maguie Tattoo</p>
     </footer>
     <script type="module" src="js/producto.js"></script>
     <script src="js/scripts.js"></script>

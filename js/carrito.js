@@ -22,6 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
 function mostrarCarrito() {
     const carritoGuardado = localStorage.getItem("carrito");
     const carrito = carritoGuardado ? JSON.parse(carritoGuardado) : [];
+    
+    console.log('=== PRODUCTOS EN CARRITO ===');
+    carrito.forEach(producto => {
+        console.log('ID:', producto.id, 'Tipo:', typeof producto.id);
+        console.log('Descripción:', producto.descripcion_corta);
+        console.log('Datos completos:', producto);
+        console.log('------------------------');
+    });
     const listaCarrito = document.getElementById("lista-carrito");
     const btnPedido = document.getElementById("realizar-pedido");
     const btnVaciar = document.getElementById("vaciar-carrito");
@@ -30,9 +38,9 @@ function mostrarCarrito() {
         ? "<p>El carrito está vacío.</p>" 
         : carrito.map(producto => `
             <div class="carrito-item" data-id="${producto.id}">
-                <img src="${producto.imagen}" alt="Imagen de ${producto.descripcion_corta}" class="carrito-item__imagen">
+                <img src="${producto.imagen}" alt="Imagen de ${producto.descripcion_corta}" style="cursor: pointer;" onclick="window.location.href='producto.html?id=${encodeURIComponent(producto.descripcion_corta)}'" class="carrito-item__imagen">
                 <div class="carrito-item__info">
-                    <p class="carrito-item__descripcion">${producto.descripcion_corta}</p>
+                    <p class="carrito-item__descripcion" style="cursor: pointer;" onclick="window.location.href='producto.html?id=${encodeURIComponent(producto.descripcion_corta)}'">${producto.descripcion_corta}</p>
                     <p class="carrito-item__precio">${producto.precio}</p>
                     <div class="cantidad-control">
                         <button class="btn-restar" data-id="${producto.id}">-</button>

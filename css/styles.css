@@ -812,38 +812,10 @@ video {
   
 }
 
-.final {
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  justify-content: center;
-  text-align: center; 
-  margin: 20px auto;
-  width: 100%;
-}
-
-.final-texto, .finalspan {
-  font-size: 16px;
-  margin: 5px 0; 
-  text-align: center; 
-}
-
-.finalspan {
-  padding-top: 15px;
-  display: inline-block;
-  transition: transform 0.4s;
-  text-shadow: 0px 0px 10px transparent;
-  color: #808080;
-}
-
-.finalspan:hover {
-  color: var(--color-secundario);
-  transform: scale(1.2);
-  text-shadow: 0px 0px 10px var(--color-principal);
-}
 
 .footer {
   margin: 0 -8.8%;
+  margin-top: auto;
   background-color: var(--fondo-translucido);
   -webkit-backdrop-filter: blur(7px);
   backdrop-filter: blur(7px);
@@ -906,7 +878,7 @@ video {
 
 .footer__text {
   color: gray;
-  font-size: 12px;
+  font-size: 13px;
   opacity: 0;
   transform: translateX(30px);
   transition: opacity 0.6s ease, transform 0.6s ease;
@@ -915,15 +887,6 @@ video {
 .footer__text--visible {
   opacity: 1;
   transform: translateX(0);
-}
-
-.footer__author:hover {
-  color: rgb(192, 192, 192);
-  text-shadow: 0 0 1px #fff;
-}
-
-.footer__emoji:hover {
-  text-shadow: 0 0 1px #f80;
 }
 
 @media screen and (max-width: 600px) {
