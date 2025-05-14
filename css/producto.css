@@ -65,7 +65,7 @@
     flex:1;
     display: flex;
     justify-content: center;
-    align-items: center;
+    flex-direction: column;
 }
 
 .producto-detalle__imagen {
@@ -126,9 +126,6 @@
     align-items: center;
     gap: 5px;
     margin-bottom: 1rem;
-    position: absolute;
-    top: 0px;
-    left: 0px;
 }
 .navegacion__icon {
     display: block;
@@ -212,6 +209,14 @@
     border: 1px solid #686868;
     padding: 0.5rem;
     border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#producto-variantes li.active {
+    border-color: var(--color-principal);
+    background: var(--color-principal);
+    color: white;
 }   
 
 

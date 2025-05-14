@@ -146,10 +146,26 @@ function mostrarProducto(producto, origen) {
     const seccionVariantes = document.querySelector('.producto-detalle__variantes');
     variantes.innerHTML = '';
 
+    let enlaceBase = producto.enlace || '';
     if (producto.variantes && producto.variantes.length > 0) {
         producto.variantes.forEach(variante => {
             const li = document.createElement('li');
             li.textContent = variante;
+            li.addEventListener('click', () => {
+                // Remover active de todos los li
+                variantes.querySelectorAll('li').forEach(item => {
+                    item.classList.remove('active');
+                });
+                // Agregar active al seleccionado
+                li.classList.add('active');
+                // Actualizar el enlace del botón comprar ya
+                if (producto.enlace) {
+                    const btnComprarYa = document.getElementById('comprar-ya');
+                    btnComprarYa.addEventListener('click', () => {
+                        window.open(enlaceBase + ' ' + variante);
+                    }, { once: true });
+                }
+            });
             variantes.appendChild(li);
         });
         seccionVariantes.style.display = 'block';
