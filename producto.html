@@ -52,17 +52,20 @@
         🛒  <span id="contador-carrito">0</span>
     
 </div></a>
-    <nav class="navegacion">
-        <a href="#" id="btn-volver" class="navegacion__link">← Volver</a>
-    </nav>
 
-    <main class="producto-detalle">
-        <div class="producto-detalle__loading">
-            <div class="loader"></div>
-            <p>Cargando producto...</p>
-        </div>
-        <div class="producto-detalle__contenedor">
-            <div class="producto-detalle__imagen-contenedor">
+<main class="producto-detalle">
+    <div class="producto-detalle__loading">
+        <div class="loader"></div>
+        <p>Cargando producto...</p>
+    </div>
+    <div class="producto-detalle__contenedor">
+        <div class="producto-detalle__imagen-contenedor">
+                <nav class="navegacion">
+                    <a href="#" id="btn-volver" class="navegacion__link">
+                        <img src="/icons/arrow-left-solid.svg" alt="volver al catalogo" class="navegacion__icon">
+                        Volver al catalogo
+                    </a>
+                </nav>
                 <img id="producto-imagen" class="producto-detalle__imagen" src="" alt="" loading="lazy">
             </div>
             <div class="producto-detalle__info">
@@ -75,13 +78,18 @@
                     <h2>Características</h2>
                     <ul id="producto-caracteristicas"></ul>
                 </div>
+                <div class="producto-detalle__botones">
+                <button id="comprar-ya" class="btn-comprar-ya">
+                    Comprar Ya
+                </button>
                 <button id="agregar-carrito" class="btn-agregar-carrito">
                     Agregar al Carrito
                 </button>
+                </div>
             </div>
         </div>
     </main>
-
+    <hr class="Medium">
     <footer class="footer" id="contacto">
         <nav class="footer__nav" aria-label="Redes sociales">
             <ul class="footer__list">

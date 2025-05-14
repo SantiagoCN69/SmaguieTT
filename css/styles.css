@@ -165,7 +165,7 @@ body.color2 {
 body {
   display: flex;
   flex-direction: column;
-  font-family: sans-serif, Helvetica, sans-serif;
+  font-family: Arial, sans-serif;
   background-color: var(--color-fondo); 
   background-image: var(--imagen-fondo);
   background-size: 100% auto; 

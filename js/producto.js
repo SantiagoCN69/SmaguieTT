@@ -127,16 +127,31 @@ function mostrarProducto(producto, origen) {
 
     // Actualizar características
     const caracteristicas = document.getElementById('producto-caracteristicas');
+    const seccionCaracteristicas = document.querySelector('.producto-detalle__caracteristicas');
     caracteristicas.innerHTML = '';
 
-    if (producto.caracteristicas) {
+    if (producto.caracteristicas && producto.caracteristicas.length > 0) {
         producto.caracteristicas.forEach(caracteristica => {
             const li = document.createElement('li');
             li.textContent = caracteristica;
             caracteristicas.appendChild(li);
         });
+        seccionCaracteristicas.style.display = 'block';
+    } else {
+        seccionCaracteristicas.style.display = 'none';
     }
     console.log('ID del producto:', producto.id);
+    // Configurar botón de comprar ya
+    const btnComprarYa = document.getElementById('comprar-ya');
+    if (producto.enlace) {
+        btnComprarYa.addEventListener('click', () => {
+            window.open(producto.enlace, '_blank');
+        });
+        btnComprarYa.style.display = 'block';
+    } else {
+        btnComprarYa.style.display = 'none';
+    }
+
     // Configurar botón de agregar al carrito
     const btnAgregarCarrito = document.getElementById('agregar-carrito');
     btnAgregarCarrito.setAttribute('data-id', producto.id);

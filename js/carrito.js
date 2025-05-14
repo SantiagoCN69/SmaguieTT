@@ -64,7 +64,7 @@ function mostrarCarrito() {
         btnVaciar.disabled = true; 
     } else {
         btnPedido.disabled = false;
-        btnPedido.textContent = "Realizar Pedido ✅";
+        btnPedido.textContent = "Realizar Pedido";
         btnVaciar.disabled = false; 
     }
 
@@ -189,7 +189,7 @@ function actualizarEstadoUltimaCompra() {
 
 
     btnUltimaCompra.textContent = ultimaCompra && JSON.parse(ultimaCompra).length > 0
-        ? "Último Pedido 🔁"
+        ? "Último Pedido"
         : "No hay último pedido";
 
     btnUltimaCompra.disabled = !ultimaCompra || JSON.parse(ultimaCompra).length === 0;
@@ -200,19 +200,11 @@ function actualizarEstadoUltimaCompra() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-
   const botonVolverCatalogo = document.getElementById('volver-catalogo');
-  const modalCatalogo = document.getElementById('modal-catalogo');
-
-  if (botonVolverCatalogo && modalCatalogo) {
+  
+  if (botonVolverCatalogo) {
     botonVolverCatalogo.addEventListener('click', function() {
-      modalCatalogo.style.display = 'block'; 
+      history.back();
     });
-
-    modalCatalogo.addEventListener('click', function(event) {
-      if (event.target === modalCatalogo) {
-        modalCatalogo.style.display = 'none';
-      }
-    });
-  } 
+  }
 });

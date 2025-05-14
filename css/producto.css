@@ -37,7 +37,7 @@
 
 .producto-detalle {
     max-width: 1200px;
-    margin: 2rem auto;
+    margin: 0 auto;
     padding: 0 1rem;
 }
 
@@ -62,16 +62,15 @@
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .producto-detalle__imagen {
     width: 80%;
+    margin: auto;
     height: auto;
     display: block;
     transition: transform 0.3s ease;
+    filter: drop-shadow(0px 0px 2px var(--color-principal));
 }
 
 .producto-detalle__imagen:hover {
@@ -82,6 +81,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    justify-content: space-between;
 }
 
 .producto-detalle__titulo {
@@ -99,7 +99,7 @@
 }
 
 .producto-detalle__descripcion {
-    color: #666;
+    color: var(--color-texto);
     background: var(--fondo-translucido);
     padding: 1rem;
     border-radius: 5px;
@@ -110,27 +110,33 @@
     text-wrap: wrap;
     
 }
-.navegacion {
-    padding: 1rem;
-    margin-bottom: 2rem;
-}
+
 
 .navegacion__link {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    background-color: var(--color-principal);
-    color: white;
+    color: #cacaca;
     text-decoration: none;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
     font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 1rem;
 }
-
+.navegacion__icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    filter: invert(100%);
+    transition: filter 0.3s ease;
+}
 .navegacion__link:hover {
-    transform: translateX(-5px);
+    color: #8b8b8b;
+}
+.navegacion__link:hover .navegacion__icon {
+    filter: invert(50%);
 }
 
-.btn-agregar-carrito {
+.btn-comprar-ya {
     background-color: var(--color-principal);
     color: white;
     border: none;
@@ -139,7 +145,25 @@
     font-size: 1.1rem;
     cursor: pointer;
     transition: transform 0.3s ease;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.btn-comprar-ya:hover {
+    transform: scale(1.02);
+}
+
+.btn-agregar-carrito {
+    background-color:transparent;
+    border: 1px solid var(--color-principal);
+    color: var(--color-principal);
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
     margin-top: auto;
+    width: 100%;
 }
 
 .btn-agregar-carrito:hover {
@@ -168,8 +192,8 @@
 
 .producto-detalle__caracteristicas li {
     padding: 0.5rem 0;
-    color: #666;
-    border-bottom: 1px solid #eee;
+    color: var(--color-texto);
+    border-bottom: 1px solid #686868;
 }
 
 @media (max-width: 768px) {
@@ -189,6 +213,11 @@
 .producto-detalle__loading {
     text-align: center;
     padding: 2rem;
+    height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .loader {
@@ -199,6 +228,7 @@
     height: 40px;
     animation: spin 1s linear infinite;
     margin: 0 auto 1rem;
+    
 }
 
 @keyframes spin {
