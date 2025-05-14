@@ -174,7 +174,7 @@ body {
   color: var(--color-texto);
   max-width: 85%;
   margin: auto;
-  min-height: 100vh;
+  min-height: calc(100dvh - 105px);
 }
 
 a {
@@ -812,7 +812,31 @@ video {
   
 }
 
+.final {
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+.final-texto {
+  font-size: 1.3rem;
+  line-height: 20px;
+  text-align: center;
+}
+.final-span {
+  font-size: 1.2rem;
+  line-height: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
 
+.final-span:hover {
+  transform: scale(1.2);
+  text-shadow: 0px 0px 5px var(--color-principal);
+}
 .footer {
   margin: 0 -8.8%;
   margin-top: auto;

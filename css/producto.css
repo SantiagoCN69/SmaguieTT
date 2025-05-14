@@ -36,9 +36,10 @@
 }
 
 .producto-detalle {
-    max-width: 1200px;
+    max-width: 1250px;
     margin: 0 auto;
-    padding: 0 1rem;
+    width: 100%;
+    flex:1;
 }
 
 .producto-detalle__contenedor {
@@ -61,6 +62,7 @@
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex:1;
 }
 
 .producto-detalle__imagen {
@@ -81,6 +83,7 @@
     flex-direction: column;
     gap: 1.5rem;
     justify-content: space-between;
+    flex:1;
 }
 
 .producto-detalle__titulo {
