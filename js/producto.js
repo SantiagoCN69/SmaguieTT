@@ -150,6 +150,21 @@ function mostrarProducto(producto, origen) {
     const imagenPrincipal = document.getElementById('producto-imagen');
     let imagenOriginal = imagenPrincipal.src;
 
+    // Configurar botón de comprar ya
+    const btnComprarYa = document.getElementById('comprar-ya');
+    let enlaceActual = producto.enlace || '';
+
+    if (producto.enlace) {
+        btnComprarYa.style.display = 'block';
+    } else {
+        btnComprarYa.style.display = 'none';
+    }
+
+    // Un solo event listener para el botón
+    btnComprarYa.addEventListener('click', () => {
+        window.open(enlaceActual, '_blank');
+    });
+
     if (producto.variantes && Object.keys(producto.variantes).length > 0) {
         Object.entries(producto.variantes).forEach(([nombre, imagenUrl]) => {
             const li = document.createElement('li');
@@ -182,24 +197,14 @@ function mostrarProducto(producto, origen) {
                         imagenOriginal = imagenUrl;
                         imagenPrincipal.src = imagenUrl;
                     }
-                    // Actualizar el enlace del botón comprar ya
-                    if (producto.enlace) {
-                        const btnComprarYa = document.getElementById('comprar-ya');
-                        btnComprarYa.addEventListener('click', () => {
-                            window.open(enlaceBase + ' ' + nombre, '_blank' );
-                        }, { once: true });
-                    }
+                    // Actualizar el enlace
+                    enlaceActual = enlaceBase + ' ' + nombre;
                 } else {
                     // Desactivar la variante
-                    imagenPrincipal.src = producto.imagen; // Volver a la imagen original del producto
+                    imagenPrincipal.src = producto.imagen;
                     imagenOriginal = producto.imagen;
                     // Restaurar el enlace original
-                    if (producto.enlace) {
-                        const btnComprarYa = document.getElementById('comprar-ya');
-                        btnComprarYa.addEventListener('click', () => {
-                            window.open(enlaceBase, '_blank');
-                        }, { once: true });
-                    }
+                    enlaceActual = enlaceBase;
                 }
             });
             variantes.appendChild(li);
@@ -207,16 +212,6 @@ function mostrarProducto(producto, origen) {
         seccionVariantes.style.display = 'block';
     } else {
         seccionVariantes.style.display = 'none';
-    }
-    // Configurar botón de comprar ya
-    const btnComprarYa = document.getElementById('comprar-ya');
-    if (producto.enlace) {
-        btnComprarYa.addEventListener('click', () => {
-            window.open(producto.enlace, '_blank');
-        });
-        btnComprarYa.style.display = 'block';
-    } else {
-        btnComprarYa.style.display = 'none';
     }
 
     // Configurar botón de agregar al carrito
