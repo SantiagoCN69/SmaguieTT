@@ -46,8 +46,7 @@
 }
 
 .producto-detalle__contenedor.activo {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     gap: 2rem;
     background: var(--fondo-translucido);
     -webkit-backdrop-filter: blur(5px);
@@ -198,7 +197,7 @@
 
 @media (max-width: 768px) {
     .producto-detalle__contenedor {
-        grid-template-columns: 1fr;
+        flex-direction: column;
     }
     
     .producto-detalle__titulo {
