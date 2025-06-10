@@ -109,6 +109,8 @@ async function cargarProducto() {
 
 // Mostrar datos del producto en la página
 function mostrarProducto(producto, origen) {
+    console.log('Mostrando producto:', producto);
+    
     // Guardar el producto actual globalmente
     window.productoActual = producto;
 

@@ -216,6 +216,7 @@ h2 {
     justify-content: space-between;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 
@@ -402,7 +403,7 @@ transition: padding 0.5s;
 }
 
 /*HEADER MEDIA*/
-@media screen and (max-width: 848px) {
+@media screen and (max-width: 948px) {
 
   .header__menu-toggle {
     display: block;

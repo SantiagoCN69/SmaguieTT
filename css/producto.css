@@ -196,6 +196,7 @@
 #producto-variantes {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 #producto-variantes li {
     display: flex;

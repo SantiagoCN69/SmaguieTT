@@ -20,7 +20,6 @@ const header = document.querySelector('.header');
 
 let headerClosedHeight;
 let isAnimating = false;
-
 // HEADER - Guardar la altura del header cuando está cerrado
 function updateHeaderClosedHeight() {
   headerClosedHeight = header.offsetHeight + 'px';
@@ -42,7 +41,9 @@ menuToggle.addEventListener('click', () => {
     requestAnimationFrame(() => {
       header.style.transition = 'height 0.3s ease';
       header.style.height = '100vh';
-    });
+      document.body.style.overflow = 'hidden';
+
+          });
   }
 });
 
@@ -57,7 +58,9 @@ function closeMenu() {
     requestAnimationFrame(() => {
       header.style.transition = 'height 0.3s ease';
       header.style.height = headerClosedHeight;
-    });
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+        });
 
     menuToggle.classList.remove('open');
     nav.classList.remove('active');
@@ -72,24 +75,22 @@ function closeMenu() {
   }
 }
 
-// Detectar scroll para actualizar altura
-let scrollTimeout;
-window.addEventListener('scroll', () => {
-  clearTimeout(scrollTimeout);
-  scrollTimeout = setTimeout(updateHeaderClosedHeight, 500);
 
 
-  if (nav.classList.contains('active')) {
-    closeMenu();
-  }
-});
-
-
-
-window.addEventListener('resize', () => {
-  setTimeout(updateHeaderClosedHeight, 300);
-});
-
+// Deshabilitar enlace de Catálogo Piercing
+const enlacePiercing = document.querySelector('a[href="catalogo-piercing.html"]');
+if (enlacePiercing) {
+    enlacePiercing.style.opacity = '0.6';
+    enlacePiercing.style.pointerEvents = 'none';
+    enlacePiercing.style.cursor = 'not-allowed';
+    enlacePiercing.title = 'Próximamente';
+    
+    // Agregar evento de clic para mostrar alerta
+    enlacePiercing.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.alert('¡Próximamente disponible!');
+    });
+}
 
 document.addEventListener('click', (event) => {
   const isClickInsideMenu =
@@ -101,22 +102,8 @@ document.addEventListener('click', (event) => {
   }
 });
 
-window.addEventListener('DOMContentLoaded', updateHeaderClosedHeight);
 
 
-
-
-//HEADER - Ajustar margen
-function ajustarMargen() {
-    const header = document.querySelector('.header');
-    if (!header) return;
-    
-    const body = document.body;
-    body.style.marginTop = `${header.offsetHeight - 12}px`;
-}
-
-
-document.addEventListener('DOMContentLoaded', ajustarMargen);
 
 //HEADER - Small
 

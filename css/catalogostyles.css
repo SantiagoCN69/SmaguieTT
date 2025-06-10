@@ -348,12 +348,12 @@ background-color:#000;
     -webkit-tap-highlight-color: transparent;
 }
 .categoria__btn--prev {
-    left: -20px;
+    left: 0;
     top: 210px;
 }
 
 .categoria__btn--next {
-    right: -20px;
+    right: 0;
     top: 210px;
 }
 
