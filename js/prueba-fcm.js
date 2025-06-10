@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-import { getFirestore, collection, query, where, getDocs, addDoc, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
 import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-messaging.js";
 import firebaseConfig from './firebase-config.js';
 
@@ -48,18 +48,18 @@ async function obtenerYGuardarToken() {
   } catch (error) {}
 }
 
-//pemiso sin bootn
-window.addEventListener("DOMContentLoaded", async () => {
-  if (Notification.permission === "granted") {
-    obtenerYGuardarToken();
-  } else if (Notification.permission === "denied") {
-  } else {
-    const permiso = await Notification.requestPermission();
-    if (permiso === "granted") {
-      obtenerYGuardarToken();
-    }
-  }
-});
+//pemiso notificaicones al cargar la pagina
+//window.addEventListener("DOMContentLoaded", async () => {
+//  if (Notification.permission === "granted") {
+//    obtenerYGuardarToken();
+//  } else if (Notification.permission === "denied") {
+//  } else {
+//    const permiso = await Notification.requestPermission();
+//    if (permiso === "granted") {
+//      obtenerYGuardarToken();
+//    }
+//  }
+//});
 
 // Notificaciones en primer plano
 onMessage(messaging, (payload) => {
