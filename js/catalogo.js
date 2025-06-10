@@ -316,7 +316,7 @@ function renderizarProductos(productos) {
         seccion.style.display = filtrados.length > 0 ? "block" : "none";
     });
 
-    document.getElementById("mensaje-no-productos").style.display = totalVisibles > 0 ? "none" : "block";
+    document.getElementById("mensaje-no-productos").style.display = totalVisibles > 0 ? "none" : "flex";
 }
 
 
@@ -360,7 +360,7 @@ function filtrarProductos() {
         });
 
         mensajeNoProductos.textContent = "No se encontraron productos.";
-        mensajeNoProductos.style.display = totalVisibles > 0 ? "none" : "block";
+        mensajeNoProductos.style.display = totalVisibles > 0 ? "none" : "flex";
 
     } catch (error) {
         console.error("Error al filtrar productos:", error);

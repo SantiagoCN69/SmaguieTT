@@ -93,6 +93,7 @@
     font-size: 2rem;
     color: var(--color-principal);
     margin: 0;
+    margin-bottom: 1rem;
 }
 
 .producto-detalle__precio {
@@ -110,10 +111,9 @@
     border-radius: 5px;
 }
 .producto-detalle__descripcion p {
-    font-size: 1rem;
+    font-size: .9rem;
     line-height: 1.6;
     text-wrap: wrap;
-    
 }
 
 
@@ -152,6 +152,7 @@
     transition: transform 0.3s ease;
     margin-bottom: 1rem;
     width: 100%;
+    text-align: center;
 }
 
 .btn-comprar-ya:hover {
@@ -221,6 +222,9 @@
 
 
 @media (max-width: 768px) {
+    .producto-detalle__contenedor.activo {
+        padding: 1rem;
+    }
     .producto-detalle__contenedor {
         flex-direction: column;
     }
