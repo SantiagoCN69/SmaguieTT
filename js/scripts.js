@@ -81,14 +81,13 @@ function closeMenu() {
 const enlacePiercing = document.querySelector('a[href="catalogo-piercing.html"]');
 if (enlacePiercing) {
     enlacePiercing.style.opacity = '0.6';
-    enlacePiercing.style.pointerEvents = 'none';
     enlacePiercing.style.cursor = 'not-allowed';
     enlacePiercing.title = 'Próximamente';
     
     // Agregar evento de clic para mostrar alerta
     enlacePiercing.addEventListener('click', (e) => {
         e.preventDefault();
-        window.alert('¡Próximamente disponible!');
+        window.alert('¡Próximamente! 🛠');
     });
 }
 
