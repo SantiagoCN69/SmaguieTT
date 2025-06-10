@@ -35,12 +35,6 @@
     right: -15px;
 }
 
-.producto-detalle {
-    max-width: 1250px;
-    margin: 0 auto;
-    width: 100%;
-    flex:1;
-}
 
 .producto-detalle__contenedor {
     display: none;
