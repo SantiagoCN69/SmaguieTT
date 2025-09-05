@@ -99,7 +99,6 @@ background-color:#000;
     height: 60px;
     transition: transform .2s, background-color .3s ease;
     box-shadow: 0px 0px 20px var(--color-fondo);
-    text-shadow: 0px 0px 10px var(--color-fondo);
 }
 #carrito-container:hover {
     transform: scale(1.1);

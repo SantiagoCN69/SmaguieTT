@@ -812,7 +812,7 @@ video {
 }
 
 .final {
-  height: 150px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -820,12 +820,12 @@ video {
   gap: 50px;
 }
 .final-texto {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   line-height: 20px;
   text-align: center;
 }
 .final-span {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 20px;
   text-align: center;
   cursor: pointer;
