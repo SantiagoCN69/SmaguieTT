@@ -30,28 +30,7 @@ function obtenerIdProducto() {
     return params.get('id');
 }
 
-// Función para volver al catálogo apropiado
-function volverAlCatalogo() {
-    const referrer = document.referrer;
-    if (referrer.includes('catalogo-piercing.html')) {
-        window.location.href = 'catalogo-piercing.html';
-    } else if (referrer.includes('catalogo-tattoo.html')) {
-        window.location.href = 'catalogo-tattoo.html';
-    } else {
-        window.location.href = 'index.html';
-    }
-}
 
-// Configurar el botón de volver
-document.addEventListener('DOMContentLoaded', () => {
-    const btnVolver = document.getElementById('btn-volver');
-    if (btnVolver) {
-        btnVolver.addEventListener('click', (e) => {
-            e.preventDefault();
-            volverAlCatalogo();
-        });
-    }
-});
 
 // Cargar datos del producto
 async function cargarProducto() {
@@ -89,7 +68,18 @@ async function cargarProducto() {
         if (!producto) {
             throw new Error('Producto no encontrado');
         }
-        
+        // Función para volver al catálogo apropiado
+
+    
+    const btnVolver = document.getElementById('btn-volver');
+    if (origen === 'productos-piercing') {
+        btnVolver.href = 'catalogo-piercing.html';
+    } else if (origen === 'productos') {
+        btnVolver.href = 'catalogo-tattoo.html';
+    } else {
+        btnVolver.href = 'index.html';
+    }
+
         mostrarProducto(producto, origen);
 
     } catch (error) {
