@@ -287,16 +287,7 @@ h2 {
     font-display: swap;
 
 }
-@media (hover:hover) {
-    .header__title:hover,
-    .header__subtitle:hover {
-        transform: scale(1.1);
-    }
-}
-.header__title:active,
-.header__subtitle:active {
-    transform: scale(0.8);
-}
+
 
 .header__menu {
   display: flex;
