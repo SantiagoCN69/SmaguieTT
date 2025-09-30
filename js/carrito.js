@@ -158,6 +158,8 @@ function generarEnlaceWhatsApp() {
                 .replace(/\brecipiente\b/gi, "Recipientes")
                 .replace(/\bpapel hectográfico\b/gi, "Papeles hectográficos")
                 .replace(/\bcuchilla\b/gi, "Cuchillas")
+                .replace(/\bbasico\b/gi, "Básicos")
+                .replace(/\blabret\b/gi, "Labrets")
                 .replace(/\bSolucion\b/gi, "Soluciones"); }
 
         mensaje += `- ${producto.cantidad} ${descripcion}\n`;
@@ -195,6 +197,13 @@ function actualizarEstadoUltimaCompra() {
     btnUltimaCompra.disabled = !ultimaCompra || JSON.parse(ultimaCompra).length === 0;
 }
 
+function restaurarUltimaCompra() {
+    const ultimaCompra = localStorage.getItem("ultimaCompra");
+    if (ultimaCompra) {
+        localStorage.setItem("carrito", ultimaCompra);
+        mostrarCarrito();
+    }
+}
 
 
 
