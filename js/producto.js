@@ -402,7 +402,7 @@ function generarProductosRandoms(origen) {
     const productosCache = JSON.parse(localStorage.getItem(coleccion));
     const productosRandom = [];
 
-    while (productosRandom.length < 10) {
+    while (productosRandom.length < 5) {
         const indiceAleatorio = Math.floor(Math.random() * productosCache.length);
         const producto = productosCache[indiceAleatorio];
         if (!productosRandom.includes(producto)) {
