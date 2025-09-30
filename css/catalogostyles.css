@@ -90,7 +90,7 @@ background-color:#000;
     align-items: center;
     position: fixed;
     bottom: 50px;
-    right: 50px;
+    right: 35px;
     font-size: 1.5rem;
     z-index: 100;
     background-color: var(--color-principal);
