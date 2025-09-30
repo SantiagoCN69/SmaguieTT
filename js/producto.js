@@ -172,6 +172,22 @@ function mostrarProducto(producto, origen) {
         touchStartX = e.changedTouches[0].screenX;
     }, false);
     
+    // Al hacer clic en la imagen, deseleccionar cualquier variante activa
+    imagenPrincipal.addEventListener('click', () => {
+        const varianteActiva = document.querySelector('#producto-variantes li.active');
+        if (varianteActiva) {
+            // Desactivar la variante
+            varianteActiva.classList.remove('active');
+            // Restaurar la imagen original
+            imagenPrincipal.src = window.productoActual.imagen;
+            // Restaurar el enlace original
+            const btnComprarYa = document.getElementById('comprar-ya');
+            if (window.productoActual.enlace) {
+                btnComprarYa.href = window.productoActual.enlace;
+            }
+        }
+    });
+    
     imagenPrincipal.addEventListener('touchend', (e) => {
         touchEndX = e.changedTouches[0].screenX;
         handleSwipe();
