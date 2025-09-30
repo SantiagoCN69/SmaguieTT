@@ -158,12 +158,15 @@ function mostrarProducto(producto, origen) {
     });
 
     if (producto.variantes && Object.keys(producto.variantes).length > 0) {
+        let hoverTimeout;
+        
         Object.entries(producto.variantes).forEach(([nombre, imagenUrl]) => {
             const li = document.createElement('li');
             li.textContent = nombre;
 
             // Eventos para cambiar la imagen
             li.addEventListener('mouseenter', () => {
+                clearTimeout(hoverTimeout);
                 if (imagenUrl && !li.classList.contains('active')) {
                     imagenPrincipal.src = imagenUrl;
                 }
@@ -171,7 +174,9 @@ function mostrarProducto(producto, origen) {
 
             li.addEventListener('mouseleave', () => {
                 if (!li.classList.contains('active')) {
-                    imagenPrincipal.src = imagenOriginal;
+                    hoverTimeout = setTimeout(() => {
+                        imagenPrincipal.src = imagenOriginal;
+                    }, 500);
                 }
             });
 
