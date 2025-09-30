@@ -79,7 +79,7 @@ async function cargarProducto() {
     } else {
         btnVolver.href = 'index.html';
     }
-
+        cargarProductosRandoms(origen);
         mostrarProducto(producto, origen);
 
     } catch (error) {
@@ -300,3 +300,55 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarProducto();
     actualizarContadorCarrito();
 });
+
+const h2otros = document.querySelector('.otros_productos h2');
+
+const opcionesTitulo = [
+    'Otros productos:',
+    'También te puede interesar:',
+    'Mira también:'
+];
+
+const indiceAleatorio = Math.floor(Math.random() * opcionesTitulo.length);
+
+h2otros.textContent = opcionesTitulo[indiceAleatorio];
+
+//generar productos randoms del cache 
+function generarProductosRandoms(origen) {
+    let coleccion = 'productosCache';
+    if (origen === 'productos-piercing') {
+        coleccion = 'productosCache-piercing';
+    }
+    const productosCache = JSON.parse(localStorage.getItem(coleccion));
+    const productosRandom = [];
+
+    while (productosRandom.length < 10) {
+        const indiceAleatorio = Math.floor(Math.random() * productosCache.length);
+        const producto = productosCache[indiceAleatorio];
+        if (!productosRandom.includes(producto)) {
+            productosRandom.push(producto);
+        }
+    }
+
+    return productosRandom;
+}
+
+//cargar los productos randoms
+function cargarProductosRandoms(origen) {
+    const productosRandom = generarProductosRandoms(origen);
+    const contenedor = document.querySelector('.otros_productos .productos');
+    contenedor.innerHTML = '';
+    productosRandom.forEach(producto => {
+        console.log(producto);
+        const div = document.createElement('a');
+        div.className = 'producto';
+        div.href = `/producto.html?id=${encodeURIComponent(producto.descripcion_corta)}`;
+        div.innerHTML = `
+            <img src="${producto.imagen}" alt="${producto.nombre}">
+            <h3>${producto.descripcion_corta}</h3>
+            <p>${producto.precio}</p>
+        `;
+        contenedor.appendChild(div);
+    });
+}
+

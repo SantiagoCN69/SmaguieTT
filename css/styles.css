@@ -47,7 +47,7 @@ body.color1 {
     --color-fondo: #000;
     --color-texto: #fff;
     --imagen-fondo: url('/imagenes/fondo2.jpg');
-    --fondo-translucido: #000000aa;
+    --fondo-translucido: #00000077;
 }
 
 body.color2 {
@@ -57,7 +57,7 @@ body.color2 {
     --color-fondo: #000;
     --color-texto: #fff;
     --imagen-fondo: url('/imagenes/fondo1.jpg');
-    --fondo-translucido: #000000aa;
+    --fondo-translucido: #00000077;
 }
 
 
