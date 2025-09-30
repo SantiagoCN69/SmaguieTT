@@ -409,8 +409,15 @@ function generarProductosRandoms(origen) {
             productosRandom.push(producto);
         }
     }
+    // Filtrar para excluir el producto actual de los productos aleatorios
+    console.log('Productos random generados:', productosRandom);
 
-    return productosRandom;
+    console.log('ID del producto actual:', decodeURIComponent(obtenerIdProducto()));
+    
+    const productosFiltrados = productosRandom.filter(item => item.descripcion_corta !== decodeURIComponent(obtenerIdProducto()));
+
+    console.log('Productos filtrados:', productosFiltrados);
+    return productosFiltrados;
 }
 
 //cargar los productos randoms
@@ -419,7 +426,6 @@ function cargarProductosRandoms(origen) {
     const contenedor = document.querySelector('.otros_productos .productos');
     contenedor.innerHTML = '';
     productosRandom.forEach(producto => {
-        console.log(producto);
         const div = document.createElement('a');
         div.className = 'producto';
         div.href = `/producto.html?id=${encodeURIComponent(producto.descripcion_corta)}`;
