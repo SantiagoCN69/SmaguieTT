@@ -141,6 +141,63 @@ function mostrarProducto(producto, origen) {
     let enlaceBase = producto.enlace || '';
     const imagenPrincipal = document.getElementById('producto-imagen');
     let imagenOriginal = imagenPrincipal.src;
+    
+    // Variables para el manejo del deslizamiento
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let variantesArray = [];
+    
+    // Función para manejar el deslizamiento
+    function handleSwipe() {
+        if (!variantesArray.length) return;
+        
+        const currentActiveIndex = variantesArray.findIndex(li => 
+            li.classList.contains('active')
+        );
+        
+        if (Math.abs(touchEndX - touchStartX) < 50) return; 
+        
+        let nextIndex;
+        if (touchEndX < touchStartX) {
+            nextIndex = (currentActiveIndex + 1) % variantesArray.length;
+        } else {
+            nextIndex = (currentActiveIndex - 1 + variantesArray.length) % variantesArray.length;
+        }
+        
+        variantesArray[nextIndex].click();
+    }
+    
+    // Eventos de toque para móviles
+    imagenPrincipal.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    
+    imagenPrincipal.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+    
+    // Eventos de ratón para escritorio
+    let isMouseDown = false;
+    let mouseStartX = 0;
+    
+    imagenPrincipal.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        mouseStartX = e.clientX;
+    });
+    
+    document.addEventListener('mousemove', (e) => {
+        if (!isMouseDown) return;
+        touchStartX = mouseStartX;
+        touchEndX = e.clientX;
+    });
+    
+    document.addEventListener('mouseup', () => {
+        if (isMouseDown) {
+            isMouseDown = false;
+            handleSwipe();
+        }
+    });
 
     // Configurar botón de comprar ya
     const btnComprarYa = document.getElementById('comprar-ya');
@@ -160,9 +217,11 @@ function mostrarProducto(producto, origen) {
     if (producto.variantes && Object.keys(producto.variantes).length > 0) {
         let hoverTimeout;
         
+        variantesArray = []; // Reiniciar el array de variantes
         Object.entries(producto.variantes).forEach(([nombre, imagenUrl]) => {
             const li = document.createElement('li');
             li.textContent = nombre;
+            variantesArray.push(li); // Agregar al array de variantes
 
             // Eventos para cambiar la imagen
             li.addEventListener('mouseenter', () => {
