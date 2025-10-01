@@ -38,5 +38,5 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             console.error('No se encontraron los elementos necesarios para el zoom');
         }
-    }, 2000); 
+    }, 1000); 
 });
