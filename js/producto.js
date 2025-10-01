@@ -399,25 +399,27 @@ function generarProductosRandoms(origen) {
     if (origen === 'productos-piercing') {
         coleccion = 'productosCache-piercing';
     }
-    const productosCache = JSON.parse(localStorage.getItem(coleccion));
+    const productosCache = JSON.parse(localStorage.getItem(coleccion)) || [];
     const productosRandom = [];
+    const maxProductos = Math.min(10, productosCache.length);
+    
+    if (maxProductos === 0) return [];
 
-    while (productosRandom.length < 5) {
+    while (productosRandom.length < maxProductos) {
         const indiceAleatorio = Math.floor(Math.random() * productosCache.length);
         const producto = productosCache[indiceAleatorio];
-        if (!productosRandom.includes(producto)) {
+        if (!productosRandom.some(p => p.descripcion_corta === producto.descripcion_corta) && 
+            producto.descripcion_corta !== decodeURIComponent(obtenerIdProducto())) {
             productosRandom.push(producto);
         }
+        
+        if (productosRandom.length === productosCache.length - 1) break;
     }
-    // Filtrar para excluir el producto actual de los productos aleatorios
+    
     console.log('Productos random generados:', productosRandom);
-
     console.log('ID del producto actual:', decodeURIComponent(obtenerIdProducto()));
     
-    const productosFiltrados = productosRandom.filter(item => item.descripcion_corta !== decodeURIComponent(obtenerIdProducto()));
-
-    console.log('Productos filtrados:', productosFiltrados);
-    return productosFiltrados;
+    return productosRandom;
 }
 
 //cargar los productos randoms
