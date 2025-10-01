@@ -204,7 +204,8 @@ h2 {
     background-color: var(--fondo-translucido);
     -webkit-backdrop-filter: blur(7px);
     backdrop-filter: blur(7px);
-    box-shadow: 0px 10px 30px 5px var(--color-fondo); 
+    transition: box-shadow 0.3s ease-in-out;
+    /*box-shadow: 0px 10px 30px 5px var(--color-fondo); */
     width: 100%;
     position: sticky;
     will-change: transform;
@@ -226,13 +227,26 @@ h2 {
     overflow: hidden;
     white-space: nowrap;
     position: relative;
-    z-index: 21;
 }
 
 #nuevo p {
+  white-space: nowrap;
   margin-inline: 8rem;
     display: inline-block;
-    animation: scroll 10s linear infinite;
+    animation: scroll 20s linear infinite;
+}
+header svg {
+  width: 20px;
+  height: 20px;
+}
+.svgheader {
+  position: relative;
+}
+.svgheader svg {
+position: absolute;
+top: -7px;
+right: -7px;
+pointer-events: none;
 }
 
 @keyframes scroll {
@@ -240,7 +254,7 @@ h2 {
         transform: translateX(0);
     }
     to {
-        transform: translateX(-100%);
+        transform: translateX(-200%);
     }
 }
 
@@ -403,6 +417,7 @@ h2 {
 
 /*HEADER SMALL*/
 .header-small {
+  box-shadow: 0px 10px 30px 5px var(--color-fondo);
   padding-top: 0;
   padding-bottom: 0;
 }
