@@ -329,7 +329,6 @@
 }
     #zoom {
         display: none;
-        border: 1px solid var(--color-principal);
     position: absolute;
     inset: 0;
     max-width: 500px;
@@ -341,8 +340,7 @@
     overflow: hidden;
     z-index: 1000;
     background-color: var(--fondo-translucido);
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(20px);
+
 }
 #zoom img {
     position: absolute;
