@@ -103,6 +103,17 @@ window.addEventListener("scroll", function () {
     }
     
 });
+//prevenir bugs visuales
+window.addEventListener("scroll", () => {
+  const y = window.scrollY;
+
+  if (y >= 45 && y <= 51) {
+    window.scrollTo({
+      top: 44,
+      behavior: "smooth"
+    });
+  }
+});
 
 
 // FOOTER - Animación de iconos y texto en el footer
