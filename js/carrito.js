@@ -160,6 +160,7 @@ function generarEnlaceWhatsApp() {
                 .replace(/\bcuchilla\b/gi, "Cuchillas")
                 .replace(/\bbasico\b/gi, "Básicos")
                 .replace(/\blabret\b/gi, "Labrets")
+                .replace(/\bdorado\b/gi, "Dorados")
                 .replace(/\bSolucion\b/gi, "Soluciones"); }
 
         mensaje += `- ${producto.cantidad} ${descripcion}\n`;
