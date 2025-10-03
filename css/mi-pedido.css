@@ -19,7 +19,7 @@ h2.pedido-title {
 }
 
 .pedido-card { 
-    border: 1px solid var(--color-borde, #e0e0e0);
+    border: 1px solid rgba(255,255,255,0.21);
     border-radius: 12px;
     background: var(--fondo-translucido);
     -webkit-backdrop-filter: blur(10px);
@@ -41,20 +41,15 @@ h2.pedido-title {
     aspect-ratio: 1/1;
     width: 100%;
     object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 0.5rem;
 }
 
 .pedido-card__title { 
     font-weight: 600;
     text-align: center;
     min-height: 3em;
-    margin: 0.25rem 0;
+    margin-bottom: 0.25rem;
     color: var(--color-texto);
     font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .pedido-card__meta { 
