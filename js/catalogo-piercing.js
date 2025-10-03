@@ -386,7 +386,8 @@ function agregarAlCarrito(id) {
     if (productoEnCarrito) {
         productoEnCarrito.cantidad += 1;
     } else {
-        carrito.push({ ...producto, cantidad: 1 });
+        // Guardado mínimo: id, descripcion_corta, precio
+        carrito.push({ id: producto.id, descripcion_corta: producto.descripcion_corta, precio: producto.precio, cantidad: 1 });
     }
 
     const contenedorCarrito = document.getElementById("carrito-container");

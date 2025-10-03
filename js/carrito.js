@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById("realizar-pedido").addEventListener("click", () => {
-        generarEnlacePedido();
+        generarEnlaceWhatsApp();
     });
 
     document.getElementById("ultima-compra").addEventListener("click", () => {
@@ -34,22 +34,41 @@ function mostrarCarrito() {
     const btnPedido = document.getElementById("realizar-pedido");
     const btnVaciar = document.getElementById("vaciar-carrito");
 
+    // Helper para obtener el producto desde cachés por ID
+    function getProductoCacheById(id) {
+        try {
+            const caches = [
+                JSON.parse(localStorage.getItem('productosCache')) || [],
+                JSON.parse(localStorage.getItem('productosCache-piercing')) || []
+            ];
+            for (const arr of caches) {
+                const p = arr.find(x => x.id === id);
+                if (p) return p;
+            }
+        } catch (e) { console.warn('Cache lookup error', e); }
+        return null;
+    }
+
     listaCarrito.innerHTML = carrito.length === 0 
         ? "<p>El carrito está vacío.</p>" 
-        : carrito.map(producto => `
+        : carrito.map(producto => {
+            const cache = getProductoCacheById(producto.id);
+            const imgSrc = (producto.imagen || (cache && cache.imagen)) || '/imagenes/logocirculo.png';
+            const precioText = producto.precio || (cache && cache.precio) || '';
+            return `
             <div class="carrito-item" data-id="${producto.id}">
-                <img src="${producto.imagen}" alt="Imagen de ${producto.descripcion_corta}" style="cursor: pointer;" onclick="window.location.href='producto.html?id=${encodeURIComponent(producto.descripcion_corta)}'" class="carrito-item__imagen">
+                <img src="${imgSrc}" alt="Imagen de ${producto.descripcion_corta}" style="cursor: pointer;" onclick="window.location.href='producto.html?id=${encodeURIComponent(producto.descripcion_corta)}'" class="carrito-item__imagen">
                 <div class="carrito-item__info">
                     <p class="carrito-item__descripcion" style="cursor: pointer;" onclick="window.location.href='producto.html?id=${encodeURIComponent(producto.descripcion_corta)}'">${producto.descripcion_corta}</p>
-                    <p class="carrito-item__precio">${producto.precio}</p>
+                    <p class="carrito-item__precio">${precioText}</p>
                     <div class="cantidad-control">
                         <button class="btn-restar" data-id="${producto.id}">-</button>
                         <span class="cantidad">${producto.cantidad}</span>
                         <button class="btn-sumar" data-id="${producto.id}">+</button>
                     </div>
                 </div>
-            </div>
-        `).join("");
+            </div>`;
+        }).join("");
 
     listaCarrito.innerHTML += carrito.length > 0 
         ? `<p id="carrito__total"><strong>Total: $${calcularTotal(carrito)}</strong></p>` 
@@ -101,16 +120,31 @@ function modificarCantidad(id, cambio) {
 }
 
 function calcularTotal(carrito) {
-    return carrito
-        .filter(p => p.precio) 
-        .reduce((acc, producto) => {
-            let precioLimpio = String(producto.precio)
-                .replace(/\(.*?\)/g, "")
-                .replace(/\./g, "") 
-                .replace(/[^\d]/g, "");
+    function getCachePrecio(id) {
+        try {
+            const caches = [
+                JSON.parse(localStorage.getItem('productosCache')) || [],
+                JSON.parse(localStorage.getItem('productosCache-piercing')) || []
+            ];
+            for (const arr of caches) {
+                const p = arr.find(x => x.id === id);
+                if (p && p.precio) return p.precio;
+            }
+        } catch (e) {}
+        return '';
+    }
 
-            return acc + parseFloat(precioLimpio) * producto.cantidad;
-        }, 0).toLocaleString("es-CO"); 
+    const total = carrito.reduce((acc, producto) => {
+        const precioFuente = producto.precio || getCachePrecio(producto.id) || '';
+        let precioLimpio = String(precioFuente)
+            .replace(/\(.*?\)/g, "")
+            .replace(/\./g, "")
+            .replace(/[^\d]/g, "");
+        const valor = parseFloat(precioLimpio) || 0;
+        return acc + valor * (producto.cantidad || 0);
+    }, 0);
+
+    return total.toLocaleString("es-CO");
 }
 
 
@@ -166,6 +200,36 @@ function generarEnlaceWhatsApp() {
         mensaje += `- ${producto.cantidad} ${descripcion}\n`;
     });
 
+    // Construir link del pedido para /mi-pedido?items= y anexar detalles si existen
+    const itemsParam = carrito.map(p => `${p.id}:${p.cantidad}`).join(',');
+    const base = window.location.origin;
+    const detalles = (document.getElementById('detalles-adicionales')?.value || '').trim();
+    const linkPedido = `${base}/mi-pedido?items=${encodeURIComponent(itemsParam)}${detalles ? `&detalles=${encodeURIComponent(detalles)}` : ''}`;
+
+    mensaje += `\nLink del pedido: ${linkPedido}\n`;
+    // Copiar link al portapapeles (Clipboard API con fallback)
+    (function copiarAlPortapapeles(texto) {
+        try {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(texto)
+                    .then(() => console.log('Link del pedido copiado al portapapeles'))
+                    .catch(err => console.warn('No se pudo copiar con Clipboard API:', err));
+            } else {
+                const ta = document.createElement('textarea');
+                ta.value = texto;
+                ta.setAttribute('readonly', '');
+                ta.style.position = 'absolute';
+                ta.style.left = '-9999px';
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand('copy'); console.log('Link del pedido copiado al portapapeles'); } catch (e) { console.warn('Fallback copy falló:', e); }
+                document.body.removeChild(ta);
+            }
+        } catch (e) { console.warn('Error copiando al portapapeles:', e); }
+    })(linkPedido);
+    if (detalles) {
+        mensaje += `\nDetalles adicionales: ${detalles}\n`;
+    }
     mensaje += "\nAgradezco su confirmación.\nA la dirección: ";
 
     let enlace = `https://wa.me/573053662867?text=${encodeURIComponent(mensaje)}`;

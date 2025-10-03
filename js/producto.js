@@ -341,19 +341,52 @@ function agregarAlCarrito(productoOId) {
     console.log('Producto/ID a agregar:', productoOId);
     console.log('Carrito actual:', carrito);
 
-    // Si es un ID, buscar el producto en el carrito
+    // Determinar ID
     const productoId = typeof productoOId === 'string' ? productoOId : productoOId.id;
     console.log('ID del producto:', productoId);
 
-    let productoEnCarrito = carrito.find(item => item.id == productoId);
-    console.log('Producto encontrado en carrito:', productoEnCarrito);
+    // Tomar datos mínimos desde el producto actual renderizado
+    const base = typeof productoOId === 'string' ? window.productoActual : productoOId;
+    // Detectar variante seleccionada (si existe)
+    const varianteActiva = document.querySelector('#producto-variantes li.active');
+    const variante = varianteActiva ? varianteActiva.textContent.trim() : undefined;
+
+    // ID destino (con sufijo si hay variante) y descripción ajustada
+    let targetId = base.id;
+    let descripcion = base.descripcion_corta;
+    if (variante) {
+        const slug = variante.toLowerCase().normalize('NFD').replace(/\p{Diacritic}/gu, '').replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        targetId = `${base.id}-${slug}`;
+        descripcion = `${base.descripcion_corta} - Variante: ${variante}`;
+    }
+
+    // Buscar en carrito por el ID final (considerando variante)
+    let productoEnCarrito = carrito.find(item => item.id == targetId);
+    console.log('Producto encontrado en carrito (por ID final):', productoEnCarrito);
 
     if (productoEnCarrito) {
         productoEnCarrito.cantidad += 1;
     } else {
-        // Si recibimos el objeto producto completo, lo usamos, si no, usamos el que está en la página
-        const producto = typeof productoOId === 'string' ? window.productoActual : productoOId;
-        carrito.push({ ...producto, cantidad: 1 });
+        const item = {
+            id: targetId,
+            descripcion_corta: descripcion,
+            precio: base.precio,
+            cantidad: 1
+        };
+        // Si hay variante, intenta adjuntar imagen específica de la variante
+        if (variante && base.variantes && typeof base.variantes === 'object') {
+            // Buscar por nombre exacto de variante
+            const entrada = Object.entries(base.variantes).find(([nombre]) => nombre === variante);
+            if (entrada) {
+                const [, variantImg] = entrada;
+                if (variantImg) item.imagen = variantImg;
+            }
+        }
+        // Si no hay variante o no se encontró imagen de variante, usar imagen base
+        if (!item.imagen && base.imagen) {
+            item.imagen = base.imagen;
+        }
+        carrito.push(item);
     }
 
     const contenedorCarrito = document.getElementById("carrito-container");
@@ -366,7 +399,9 @@ function agregarAlCarrito(productoOId) {
 
     guardarCarrito();
     actualizarContadorCarrito();
-    mostrarContadorEnBoton(producto.id, carrito.find(p => p.id === producto.id).cantidad);
+    // Si hay variante activa, el contador del botón sigue siendo por producto base
+    const cantidadActual = (carrito.find(p => p.id == productoId) || {}).cantidad || 1;
+    mostrarContadorEnBoton(productoId, cantidadActual);
 }
 
 
