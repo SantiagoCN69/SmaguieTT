@@ -66,11 +66,11 @@
     object-fit: contain;
     margin: auto;
     transition: transform 0.3s ease;
+    cursor: zoom-in;
 }
 
 .producto-detalle__imagen:hover {
     transform: scale(1.05);
-    cursor: zoom-in;
 }
 
 .producto-detalle__info {
@@ -325,6 +325,9 @@
 @media (max-width: 768px) {
     #zoom {
         display: none !important;
+    }
+    .producto-detalle__imagen {
+        cursor: default;
     }
 }
     #zoom {
