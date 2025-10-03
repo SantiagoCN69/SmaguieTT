@@ -31,6 +31,33 @@ function obtenerIdProducto() {
 }
 
 
+// Precarga de imágenes de variantes
+// en el cambio de imagen al pasar el mouse o al hacer swipe. Se almacena una referencia en
+// window._preloadedVariantImages para evitar duplicados y permitir que el GC libere si es necesario.
+function preloadVariantImages(variantes) {
+    try {
+        if (!variantes || typeof variantes !== 'object') return;
+        window._preloadedVariantImages = window._preloadedVariantImages || {};
+
+        Object.values(variantes).forEach((url) => {
+            if (typeof url !== 'string' || !url) return;
+            if (window._preloadedVariantImages[url]) return;
+
+            const img = new Image();
+            // Sugerimos decodificación asíncrona para no bloquear render
+            img.decoding = 'async';
+            // Indicamos carga ansiosa para priorizar la descarga inmediata
+            img.loading = 'eager';
+            img.src = url;
+
+            window._preloadedVariantImages[url] = img;
+        });
+    } catch (e) {
+        console.warn('Precarga de variantes: se ignoró un error no crítico', e);
+    }
+}
+
+
 
 // Cargar datos del producto
 async function cargarProducto() {
@@ -103,6 +130,11 @@ function mostrarProducto(producto, origen) {
     
     // Guardar el producto actual globalmente
     window.productoActual = producto;
+
+    // Precargar imágenes de variantes para eliminar delay en hover/swipe
+    if (producto.variantes && Object.keys(producto.variantes).length > 0) {
+        preloadVariantImages(producto.variantes);
+    }
 
     // Actualizar título de la página
     document.title = `${producto.descripcion_corta} - SmaguieTT`;
