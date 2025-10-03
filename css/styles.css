@@ -217,7 +217,7 @@ h2 {
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 }
 #nuevo {
     background-color: var(--color-principal);
