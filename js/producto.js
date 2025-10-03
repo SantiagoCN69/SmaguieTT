@@ -4,19 +4,13 @@ let firestoreDb = null;
 
 // Inicializar Firebase
 async function initFirebase() {
-    console.log('Inicializando Firebase...');
     try {
-        // Si Firebase ya está inicializado, usar la instancia existente
         if (window.firebase && window.firebase.apps.length > 0) {
             firestoreDb = window.firebase.firestore();
-            console.log('Usando instancia existente de Firebase');
             return { db: firestoreDb };
         }
-
-        // Inicializar Firebase si no está inicializado
         window.firebase.initializeApp(firebaseConfig);
         firestoreDb = window.firebase.firestore();
-        console.log('Firebase inicializado correctamente');
         return { db: firestoreDb };
     } catch (error) {
         console.error('Error al inicializar Firebase:', error);
@@ -63,7 +57,6 @@ function preloadVariantImages(variantes) {
 async function cargarProducto() {
     try {
         const descripcionCorta = decodeURIComponent(obtenerIdProducto());
-        console.log('Buscando producto con descripción:', descripcionCorta);
         
         if (!descripcionCorta) {
             throw new Error('No se proporcionó ID del producto');
@@ -86,8 +79,6 @@ async function cargarProducto() {
                 const doc = snapshot.docs[0];
                 producto = doc.data();
                 origen = coleccion;
-                console.log('Producto encontrado:', producto);
-                console.log('ID del producto:', producto.id);
                 break;
             }
         }
@@ -126,30 +117,23 @@ async function cargarProducto() {
 
 // Mostrar datos del producto en la página
 function mostrarProducto(producto, origen) {
-    console.log('Mostrando producto:', producto);
-    
     // Guardar el producto actual globalmente
     window.productoActual = producto;
 
-    // Precargar imágenes de variantes para eliminar delay en hover/swipe
     if (producto.variantes && Object.keys(producto.variantes).length > 0) {
         preloadVariantImages(producto.variantes);
     }
 
-    // Actualizar título de la página
     document.title = `${producto.descripcion_corta} - SmaguieTT`;
     
-    // Actualizar imagen
     const imagenProducto = document.getElementById('producto-imagen');
     imagenProducto.src = producto.imagen;
     imagenProducto.alt = producto.descripcion_corta;
     
-    // Actualizar información del producto
     document.getElementById('producto-titulo').textContent = producto.descripcion_corta;
     document.getElementById('producto-precio').textContent = producto.precio;
     document.getElementById('producto-descripcion').textContent = producto.descripcion_larga;
 
-    // Actualizar características
     const caracteristicas = document.getElementById('producto-caracteristicas');
     const seccionCaracteristicas = document.querySelector('.producto-detalle__caracteristicas');
     caracteristicas.innerHTML = '';
@@ -165,7 +149,6 @@ function mostrarProducto(producto, origen) {
         seccionCaracteristicas.style.display = 'none';
     }
 
-    // Actualizar variantes
     const variantes = document.getElementById('producto-variantes');
     const seccionVariantes = document.querySelector('.producto-detalle__variantes');
     variantes.innerHTML = '';
@@ -174,12 +157,10 @@ function mostrarProducto(producto, origen) {
     const imagenPrincipal = document.getElementById('producto-imagen');
     let imagenOriginal = imagenPrincipal.src;
     
-    // Variables para el manejo del deslizamiento
     let touchStartX = 0;
     let touchEndX = 0;
     let variantesArray = [];
     
-    // Función para manejar el deslizamiento
     function handleSwipe() {
         if (!variantesArray.length) return;
         
@@ -199,20 +180,15 @@ function mostrarProducto(producto, origen) {
         variantesArray[nextIndex].click();
     }
     
-    // Eventos de toque para móviles
     imagenPrincipal.addEventListener('touchstart', (e) => {
         touchStartX = e.changedTouches[0].screenX;
     }, false);
     
-    // Al hacer clic en la imagen, deseleccionar cualquier variante activa
     imagenPrincipal.addEventListener('click', () => {
         const varianteActiva = document.querySelector('#producto-variantes li.active');
         if (varianteActiva) {
-            // Desactivar la variante
             varianteActiva.classList.remove('active');
-            // Restaurar la imagen original
             imagenPrincipal.src = window.productoActual.imagen;
-            // Restaurar el enlace original
             const btnComprarYa = document.getElementById('comprar-ya');
             if (window.productoActual.enlace) {
                 btnComprarYa.href = window.productoActual.enlace;
@@ -225,7 +201,6 @@ function mostrarProducto(producto, origen) {
         handleSwipe();
     }, false);
     
-    // Eventos de ratón para escritorio
     let isMouseDown = false;
     let mouseStartX = 0;
     
@@ -247,7 +222,6 @@ function mostrarProducto(producto, origen) {
         }
     });
 
-    // Configurar botón de comprar ya
     const btnComprarYa = document.getElementById('comprar-ya');
     let enlaceActual = producto.enlace || '';
 
@@ -257,7 +231,6 @@ function mostrarProducto(producto, origen) {
         btnComprarYa.style.display = 'none';
     }
 
-    // Un solo event listener para el botón
     btnComprarYa.addEventListener('click', () => {
         window.open(enlaceActual, '_blank');
     });
@@ -271,7 +244,6 @@ function mostrarProducto(producto, origen) {
             li.textContent = nombre;
             variantesArray.push(li); // Agregar al array de variantes
 
-            // Eventos para cambiar la imagen
             li.addEventListener('mouseenter', () => {
                 clearTimeout(hoverTimeout);
                 if (imagenUrl && !li.classList.contains('active')) {
@@ -289,25 +261,20 @@ function mostrarProducto(producto, origen) {
 
             li.addEventListener('click', () => {
                 const wasActive = li.classList.contains('active');
-                // Remover active de todos los li
                 variantes.querySelectorAll('li').forEach(item => {
                     item.classList.remove('active');
                 });
 
                 if (!wasActive) {
-                    // Activar la variante
                     li.classList.add('active');
                     if (imagenUrl) {
                         imagenOriginal = imagenUrl;
                         imagenPrincipal.src = imagenUrl;
                     }
-                    // Actualizar el enlace
                     enlaceActual = enlaceBase + ' ' + nombre;
                 } else {
-                    // Desactivar la variante
                     imagenPrincipal.src = producto.imagen;
                     imagenOriginal = producto.imagen;
-                    // Restaurar el enlace original
                     enlaceActual = enlaceBase;
                 }
             });
@@ -318,10 +285,8 @@ function mostrarProducto(producto, origen) {
         seccionVariantes.style.display = 'none';
     }
 
-    // Configurar botón de agregar al carrito
     const btnAgregarCarrito = document.getElementById('agregar-carrito');
     btnAgregarCarrito.setAttribute('data-id', producto.id);
-    // Remover eventos anteriores para evitar duplicados
     const nuevoBtn = btnAgregarCarrito.cloneNode(true);
     btnAgregarCarrito.parentNode.replaceChild(nuevoBtn, btnAgregarCarrito);
     nuevoBtn.addEventListener('click', () => agregarAlCarrito(producto.id));
@@ -343,20 +308,13 @@ let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 
 function agregarAlCarrito(productoOId) {
-    console.log('Producto/ID a agregar:', productoOId);
-    console.log('Carrito actual:', carrito);
-
     // Determinar ID
     const productoId = typeof productoOId === 'string' ? productoOId : productoOId.id;
-    console.log('ID del producto:', productoId);
 
-    // Tomar datos mínimos desde el producto actual renderizado
     const base = typeof productoOId === 'string' ? window.productoActual : productoOId;
-    // Detectar variante seleccionada (si existe)
     const varianteActiva = document.querySelector('#producto-variantes li.active');
     const variante = varianteActiva ? varianteActiva.textContent.trim() : undefined;
 
-    // ID destino (con sufijo si hay variante) y descripción ajustada
     let targetId = base.id;
     let descripcion = base.descripcion_corta;
     if (variante) {
@@ -365,9 +323,7 @@ function agregarAlCarrito(productoOId) {
         descripcion = `${base.descripcion_corta} - Variante: ${variante}`;
     }
 
-    // Buscar en carrito por el ID final (considerando variante)
     let productoEnCarrito = carrito.find(item => item.id == targetId);
-    console.log('Producto encontrado en carrito (por ID final):', productoEnCarrito);
 
     if (productoEnCarrito) {
         productoEnCarrito.cantidad += 1;
@@ -455,7 +411,6 @@ function mostrarContadorEnBoton(idProducto, cantidad) {
     contador.innerHTML = `<span>${qty}</span>`;
     contador.classList.add("mostrar");
 
-    // Reinicia la animación para que se note el cambio
     void contador.offsetWidth;
     contador.querySelector("span").style.animation = "rueda 0.4s ease";
 }
@@ -463,7 +418,6 @@ function mostrarContadorEnBoton(idProducto, cantidad) {
 
 // Iniciar la carga del producto cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM cargado, iniciando carga de producto...');
     cargarProducto();
     actualizarContadorCarrito();
 });
@@ -503,8 +457,6 @@ function generarProductosRandoms(origen) {
         if (productosRandom.length === productosCache.length - 1) break;
     }
     
-    console.log('Productos random generados:', productosRandom);
-    console.log('ID del producto actual:', decodeURIComponent(obtenerIdProducto()));
     
     return productosRandom;
 }

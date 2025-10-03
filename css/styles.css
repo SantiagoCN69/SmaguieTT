@@ -336,7 +336,8 @@ pointer-events: none;
 .header__menu-item {
   display: flex;
   justify-content: center; 
-  width: 100%;
+  width: fit-content;
+  min-width: 180px;
   
 }
 
