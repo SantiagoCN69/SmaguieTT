@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Esperar 2 segundos antes de inicializar el zoom
-    setTimeout(() => {
         const img = document.getElementById('producto-imagen');
         const zoom = document.getElementById('zoom');
         const zoomImg = zoom ? zoom.querySelector('img') : null;
@@ -38,5 +37,5 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             console.error('No se encontraron los elementos necesarios para el zoom');
         }
-    }, 1000); 
+    
 });
