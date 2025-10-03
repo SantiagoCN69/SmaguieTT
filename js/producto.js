@@ -329,6 +329,11 @@ function mostrarProducto(producto, origen) {
     // Ocultar loading y mostrar el contenedor del producto
     document.querySelector('.producto-detalle__loading').classList.add('oculto');
     document.querySelector('.producto-detalle__contenedor').classList.add('activo');
+
+    // Sincronizar contador del botón al cargar el producto (sumando variantes)
+    try {
+        mostrarContadorEnBoton(producto.id);
+    } catch (e) { console.warn('No se pudo actualizar el contador en carga:', e); }
 }
 
 // Función para agregar al carrito
@@ -399,8 +404,8 @@ function agregarAlCarrito(productoOId) {
 
     guardarCarrito();
     actualizarContadorCarrito();
-    // Si hay variante activa, el contador del botón sigue siendo por producto base
-    const cantidadActual = (carrito.find(p => p.id == productoId) || {}).cantidad || 1;
+    // Actualizar contador del botón por ID base (sumando todas las variantes)
+    const cantidadActual = obtenerCantidadPorIdBase(productoId);
     mostrarContadorEnBoton(productoId, cantidadActual);
 }
 
@@ -419,7 +424,20 @@ function actualizarContadorCarrito() {
 
 
 
-//contador carrito en el boton 
+// Suma la cantidad total en carrito para un ID base (incluye variantes con sufijo)
+function obtenerCantidadPorIdBase(idBase) {
+    try {
+        const prefijo = `${idBase}-`;
+        return carrito.reduce((acc, item) => {
+            if (item.id === idBase || (typeof item.id === 'string' && item.id.startsWith(prefijo))) {
+                return acc + (item.cantidad || 0);
+            }
+            return acc;
+        }, 0);
+    } catch { return 0; }
+}
+
+// contador carrito en el botón (por producto base)
 function mostrarContadorEnBoton(idProducto, cantidad) {
     const boton = document.querySelector(`#agregar-carrito[data-id="${idProducto}"]`);
     if (!boton) return;
@@ -432,7 +450,9 @@ function mostrarContadorEnBoton(idProducto, cantidad) {
         boton.appendChild(contador);
     }
 
-    contador.innerHTML = `<span>${cantidad}</span>`;
+    // Si no se pasó cantidad, calcular por ID base
+    const qty = (typeof cantidad === 'number') ? cantidad : obtenerCantidadPorIdBase(idProducto);
+    contador.innerHTML = `<span>${qty}</span>`;
     contador.classList.add("mostrar");
 
     // Reinicia la animación para que se note el cambio
