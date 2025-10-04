@@ -128,7 +128,9 @@ function formatearCOP(valor) {
 }
 
 function crearCardProducto(producto, cantidad, opts = {}) {
-  const div = document.createElement('div');
+  const div = document.createElement('a');
+  console.log(producto);
+  div.href = `/producto.html?id=${producto.descripcion_corta}`;
   div.className = 'pedido-card';
 
   const overrideImg = opts.imagenOverride || producto.imagen || '';
