@@ -204,7 +204,7 @@ function generarEnlaceWhatsApp() {
     const itemsParam = carrito.map(p => `${p.id}:${p.cantidad}`).join(',');
     const base = window.location.origin;
     const detalles = (document.getElementById('detalles-adicionales')?.value || '').trim();
-    const linkPedido = `${base}/mi-pedido?items=${encodeURIComponent(itemsParam)}${detalles ? `&detalles=${encodeURIComponent(detalles)}` : ''}`;
+    const linkPedido = `${base}/mi-pedido.html?items=${encodeURIComponent(itemsParam)}${detalles ? `&detalles=${encodeURIComponent(detalles)}` : ''}`;
 
     mensaje += `\nLink del pedido: ${linkPedido}\n`;
     // Copiar link al portapapeles (Clipboard API con fallback)
