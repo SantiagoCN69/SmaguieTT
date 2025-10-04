@@ -236,8 +236,8 @@ h2 {
     animation: scroll 20s linear infinite;
 }
 header svg {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
 }
 .svgheader {
   position: relative;
