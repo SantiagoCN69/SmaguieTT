@@ -408,7 +408,7 @@ function mostrarContadorEnBoton(idProducto, cantidad) {
 
     // Si no se pasó cantidad, calcular por ID base
     const qty = (typeof cantidad === 'number') ? cantidad : obtenerCantidadPorIdBase(idProducto);
-    contador.innerHTML = `<span>${qty}</span>`;
+    contador.innerHTML = `<span>(${qty})</span>`;
     contador.classList.add("mostrar");
 
     void contador.offsetWidth;
