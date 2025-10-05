@@ -290,7 +290,6 @@
     padding-bottom: 1rem;
 }
 .producto {
-    cursor: crosshair;
     max-width: calc(200px + 2rem);
     background: var(--fondo-translucido);
     border-radius: 5px;
