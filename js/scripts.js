@@ -90,30 +90,40 @@ document.addEventListener('click', (event) => {
 
 
 
-//HEADER - Small
+const SHRINK_ADD_Y = 80;
+const SHRINK_REMOVE_Y = 20;
+let headerIsSmall = false;
+let ticking = false;
 
-window.addEventListener("scroll", function () {
-    const header = document.querySelector(".header");
-    if (!header) return;
-    
-    if (window.scrollY > 50) {
-        header.classList.add("header-small");
-    } else {
-        header.classList.remove("header-small");
-    }
-    
-});
-//prevenir bugs visuales
-window.addEventListener("scroll", () => {
-  const y = window.scrollY;
+function applyHeaderState(y) {
+  const header = document.querySelector(".header");
+  if (!header) return;
 
-  if (y >= 45 && y <= 51) {
-    window.scrollTo({
-      top: 44,
-      behavior: "smooth"
-    });
+  if (header.classList.contains('active')) return;
+
+  if (!headerIsSmall && y > SHRINK_ADD_Y) {
+    header.classList.add("header-small");
+    headerIsSmall = true;
+  } else if (headerIsSmall && y < SHRINK_REMOVE_Y) {
+    header.classList.remove("header-small");
+    headerIsSmall = false;
   }
-});
+}
+
+window.addEventListener(
+  "scroll",
+  () => {
+    const y = window.scrollY || 0;
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(() => {
+        applyHeaderState(y);
+        ticking = false;
+      });
+    }
+  },
+  { passive: true }
+);
 
 
 // FOOTER - Animación de iconos y texto en el footer
