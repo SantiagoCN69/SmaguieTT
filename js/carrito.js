@@ -236,7 +236,8 @@ function generarEnlaceWhatsApp() {
     
     console.log("Enlace generado:", enlace);
     window.open(enlace, "_blank");
-
+    
+    location.href = linkPedido;
     localStorage.setItem("ultimaCompra", JSON.stringify(carrito));
 
     localStorage.removeItem("carrito");
