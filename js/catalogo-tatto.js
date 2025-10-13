@@ -252,7 +252,8 @@ const CATEGORIAS = [
     { id: "productos5", key: "categoria5" },
     { id: "productos6", key: "categoria6" },
     { id: "productos7", key: "categoria7" },
-    { id: "productos8", key: "categoria8" }
+    { id: "productos8", key: "categoria8" },
+    { id: "productos9", key: "categoria9" }
 ];
 
 function crearArticuloHTML(producto) {
