@@ -62,6 +62,7 @@
 
 .producto-detalle__imagen {
     aspect-ratio: 1;
+    border-radius: 8px;
     width: 80%;
     object-fit: contain;
     margin: auto;
@@ -307,6 +308,7 @@
         aspect-ratio: 1;
         width: 200px;
         object-fit: contain;
+        border-radius: 5px;
     }
     h3 {
         font-size: 1rem;
