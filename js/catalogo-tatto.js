@@ -69,18 +69,6 @@ function reiniciarScroll() {
 }
 
 
-function cerrarDescripciones() {
-    document.querySelectorAll(".producto__descripcion").forEach(descripcion => {
-        descripcion.classList.add("corta");
-        descripcion.querySelector(".texto-descripcion").textContent = descripcion.getAttribute("data-corta");
-    });
-
-    document.querySelectorAll(".toggle-descripcion").forEach(boton => {
-        boton.textContent = " Ver más";
-    });
-}
-
-
 let productosGlobales = [];
 
 
@@ -257,22 +245,56 @@ const CATEGORIAS = [
 ];
 
 function crearArticuloHTML(producto) {
+    const tieneDescuento = producto.descuento && producto.descuento > 0;
+    
+    // Mostrar en consola los productos que tienen descuento
+    if (tieneDescuento) {
+        console.log('Producto con descuento:', {
+            id: producto.id,
+            descripcion: producto.descripcion_corta,
+            precioOriginal: producto.precio,
+            descuento: `${producto.descuento}%`,
+            precioConDescuento: calcularPrecioDescuento(producto.precio, producto.descuento)
+        });
+    }
+
     return `
         <article class="producto" data-id="${producto.descripcion_corta}">
             <div class="producto__imagen-contenedor producto-link" data-id="${producto.descripcion_corta}">
+                ${tieneDescuento ? `<span class="producto__descuento">-${producto.descuento}%</span>` : ""}
                 <img class="producto__imagen" src="${producto.imagen}" title="${producto.descripcion_corta}" alt="${producto.descripcion_corta}" loading="lazy">
             </div>
             <div class="producto__info">
-                <p class="producto__precio producto-link" data-id="${producto.descripcion_corta}">${producto.precio}</p>
+                <p class="producto__precio producto-link" data-id="${producto.descripcion_corta}">
+                    ${tieneDescuento 
+                        ? `<span class="precio-original" style="text-decoration: line-through; color: #999; ">${producto.precio}</span> <br>
+                           <span class="precio-descuento" style="color: #e74c3c; font-weight: bold;">${calcularPrecioDescuento(producto.precio, producto.descuento)}</span>`
+                        : producto.precio
+                    }
+                </p>
                 <p class="producto__descripcion corta">
                     <span class="texto-descripcion producto-link" data-id="${producto.descripcion_corta}">${producto.descripcion_corta}</span>
-                    <button class="toggle-descripcion producto-link" data-id="${producto.descripcion_corta}"> Ver más</button>
+                    <button class="toggle-descripcion producto-link" data-id="${producto.descripcion_corta}">Ver más</button>
                 </p>
                 <button class="agregar-carrito" data-id="${producto.id}">Agregar al carrito</button>
             </div>
         </article>
     `;
-}
+    }
+    function calcularPrecioDescuento(precioOriginal, descuento) {
+        const valorNumerico = parseFloat(precioOriginal.replace(/[^0-9]/g, ''));
+        
+        const precioConDescuento = valorNumerico - (valorNumerico * descuento / 100);
+        
+        const formatter = new Intl.NumberFormat('es-CL', {
+            style: 'currency',
+            currency: 'CLP',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
+    
+        return formatter.format(precioConDescuento).replace('CLP', '').trim();
+    }
 
 function renderizarEnContenedor(contenedor, productos) {
     contenedor.innerHTML = "";
@@ -383,9 +405,24 @@ function agregarAlCarrito(id) {
     let productoEnCarrito = carrito.find(item => item.id == id);
     if (productoEnCarrito) {
         productoEnCarrito.cantidad += 1;
+        // Actualizar el descuento por si cambió
+        if (producto.descuento !== undefined) {
+            productoEnCarrito.descuento = producto.descuento;
+        }
     } else {
-        // Guardado mínimo: id, descripcion_corta, precio
-        carrito.push({ id: producto.id, descripcion_corta: producto.descripcion_corta, precio: producto.precio, cantidad: 1 });
+        // Asegurarse de que el descuento se guarde, incluso si es 0 o null
+        const productoCarrito = {
+            id: producto.id,
+            descripcion_corta: producto.descripcion_corta,
+            precio: producto.precio,
+            cantidad: 1,
+            descuento: producto.descuento
+        };
+        // Solo agregar descuento si existe en el producto
+        if (producto.descuento !== undefined) {
+            productoCarrito.descuento = producto.descuento;
+        }
+        carrito.push(productoCarrito);
     }
 
     const contenedorCarrito = document.getElementById("carrito-container");
