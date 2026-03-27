@@ -268,7 +268,7 @@ function crearArticuloHTML(producto) {
                 <p class="producto__precio producto-link" data-id="${producto.descripcion_corta}">
                     ${tieneDescuento 
                         ? `<span class="precio-original" style="text-decoration: line-through; color: #999; ">${producto.precio}</span> <br>
-                           <span class="precio-descuento" style="color: #e74c3c; font-weight: bold;">${calcularPrecioDescuento(producto.precio, producto.descuento)}</span>`
+                           <span class="precio-descuento" style="color: #3ce746; font-weight: bold;">${calcularPrecioDescuento(producto.precio, producto.descuento)}</span>`
                         : producto.precio
                     }
                 </p>
