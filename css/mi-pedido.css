@@ -61,36 +61,33 @@ h2.pedido-title {
     line-height: 1.4;
 }
 
-/* Resumen del pedido */
+/* --- Cuadro de Resumen Final --- */
 .pedido-resumen {
-    background: var(--fondo-translucido);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin: 2rem 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    border: 1px solid var(--color-borde);
-}
-
-.pedido-resumen p {
-    margin: 0.75rem 0;
-    font-size: 1.1rem;
-    color: var(--color-texto);
+    gap: 1rem;
+    background: #0a0a0a;
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px dashed #333; /* Estilo ticket de compra */
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-end; /* Todo alineado a la derecha */
+    margin: 2rem 0;
 }
 
-.pedido-resumen p:last-child {
-    font-weight: 700;
-    font-size: 1.25rem;
-    color: var(--color-principal);
-    padding-top: 0.5rem;
-    border-top: 1px solid var(--color-borde);
-    margin-top: 1rem;
-    padding-top: 1rem;
+#pedido-cantidad {
+    color: #888;
+    font-size: 1rem;
+    margin-bottom: 5px;
 }
+
+#pedido-total {
+    color: #ff3d98; /* Resalte en fucsia */
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0;
+}
+
+
 
 /* Detalles adicionales */
 #pedido-detalles {
@@ -133,4 +130,13 @@ h2.pedido-title {
     }
 }
 
-/* Animación de carga */
+@media (max-width: 600px) {
+    #pedido-total {
+        font-size: 1.6rem;
+    }
+    
+    .pedido-resumen {
+        align-items: center; /* Centrado en móviles para mejor lectura */
+        text-align: center;
+    }
+}
