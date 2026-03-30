@@ -681,14 +681,12 @@ video {
     overflow: hidden;
 }
 
-/* Efecto al pasar el mouse */
 .caracteristica:hover {
     transform: translateY(-10px);
-    border-color: #ff3d98; /* Acento fucsia */
+    border-color: #ff3d98;
     box-shadow: 0 10px 30px rgba(255, 61, 152, 0.1);
 }
 
-/* Títulos con Iconos */
 .caracteristica h3 {
     display: flex;
     align-items: center;
@@ -698,9 +696,8 @@ video {
     gap: 12px;
 }
 
-/* Estilo de los iconos */
 .iconocaracteristicas {
-    filter: brightness(0) invert(1); /* Convierte iconos oscuros a blancos si son PNG/SVG */
+    filter: brightness(0) invert(1);
     transition: transform 0.3s ease;
 }
 
@@ -708,7 +705,6 @@ video {
     transform: rotate(10deg) scale(1.1);
 }
 
-/* Texto de descripción */
 .caracteristica p {
     color: #aaa;
     font-size: 0.95rem;
@@ -716,7 +712,6 @@ video {
     margin: 0;
 }
 
-/* Detalle decorativo lateral (opcional) */
 .caracteristica::before {
     content: "";
     position: absolute;
@@ -732,13 +727,14 @@ video {
     height: 100%;
 }
 
-/* Ajustes para móviles */
 @media (max-width: 768px) {
     #caracteristicas {
         padding: 40px 15px;
-        grid-template-columns: 1fr; /* Una sola columna en móvil */
+        grid-template-columns: 1fr;
     }
 }
+
+/* Productos */
 .h2swiper2 {
   margin-top: 20px;
   margin-bottom: 20px;
