@@ -496,6 +496,8 @@ transition: padding 0.5s;
   border: none; 
   border-radius: 50px; 
   margin: 40px auto; 
+  background: linear-gradient(to right, transparent, var(--color-principal), transparent);
+  margin: 3rem 0;
 }
 main, #main {
   width: 95%;
