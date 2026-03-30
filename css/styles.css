@@ -223,13 +223,14 @@ h2 {
     flex-wrap: wrap;
 }
 #nuevo {
-    background-color: var(--color-principal);
-    color: var(--color-secundario);
-    padding: 15px 0;
-    text-align: center;
+    background: #1a1a1a;
+    display: flex;
     overflow: hidden;
     white-space: nowrap;
-    position: relative;
+    padding: 10px 0;
+    text-decoration: none;
+    border-top: 1px solid var(--color-principal);
+    border-bottom: 1px solid var(--color-principal);
 }
 
 #nuevo p {
@@ -316,14 +317,14 @@ pointer-events: none;
 }
 
 .header__title {
-    font-size: clamp(12px, 7vw, 35px); 
+    font-size: clamp(12px, 7vw, 30px); 
     letter-spacing: 2px;
     transition: transform 0.3s;
 
 }
 
 .header__subtitle {
-    font-size: clamp(10px, 4vw, 20px); 
+    font-size: clamp(10px, 4vw, 17px); 
     transition: transform 0.3s;
     font-display: swap;
 
@@ -333,23 +334,21 @@ pointer-events: none;
 .header__menu {
   display: flex;
   align-items: center; 
-  gap: 20px;
+  gap: 10px;
 }
-
 .header__menu-item {
   display: flex;
   justify-content: center; 
-  width: 100%
-  
+  width: 100%;
 }
 
 .header__menu-link {
+  position: relative;
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center; 
-  background: var(--color-principal);
+  text-align: center;
   padding-inline: 12px;
   height: 45px;
   border-radius: 5px;
@@ -358,16 +357,40 @@ pointer-events: none;
   text-decoration: none;
   width: 100%;
   max-width: 200px; 
-  transition: transform 0.3s;
+  transition: all 0.3s ease;
+  font-weight: 600;
 }
 
+/* Creación de la línea inferior */
+.header__menu-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%; 
+  width: 0;   
+  height: 3px;
+  background-color: var(--color-secundario); 
+  transition: all 0.3s ease;
+  transform: translateX(-50%); 
+}
 
+/* Efecto Hover */
 .header__menu-link:hover {
-    transform: scale(1.05);
+  color: var(--color-principal);
 }
 
+.header__menu-link:hover::after {
+  width: 80%;
+  background-color: var(--color-principal); 
+}
 
-
+/* Estilo para el SVG dentro del botón */
+.header__menu-link svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor; 
+  margin-right: 8px; 
+}
 .header__menu-toggle {
   color: var(--color-principal);
   cursor: pointer;
@@ -427,9 +450,16 @@ pointer-events: none;
 .header {
 transition: padding 0.5s;
 }
-.header-small .header__logo, .header-small .header__titles, .header-small .header__menu, .header-small .header__menu-toggle {
+.header-small .header__logo, .header-small .header__titles, .header-small .header__menu-toggle {
   transform: scale(0.8);
   
+}
+.header__subtitle {
+  transition: transform 0.5s, height 0.5s;
+}
+.header-small .header__subtitle {
+  transform: scale(0);
+  height: 0;
 }
 .header__logo, .header__titles, .header__menu {
   transition: transform 0.5s;
@@ -496,7 +526,7 @@ transition: padding 0.5s;
   border: none; 
   border-radius: 50px; 
   margin: 40px auto; 
-  background: linear-gradient(to right, transparent, var(--color-principal), transparent);
+  background: linear-gradient(to right, transparent, var(--color-principal  ), transparent);
   margin: 3rem 0;
 }
 main, #main {
@@ -504,16 +534,15 @@ main, #main {
   max-width: 1200px;
   margin: auto;
 }
-#bienvenida {
-  letter-spacing: 1px;
-  margin-bottom: 10px;
+#bienvenida{
+    text-align: center;
+    padding: 0px;
 }
-
-#bienvenida p {
-  padding-bottom: 20px;
-  padding-top: 20px;
-}
-
+ #bienvenida p {
+    text-align: center;
+  padding-block: 20px;
+  padding-bottom: 40px;
+ }
 .swiper1 {
   width: 100%;
   height: clamp(250px, 50vw, 500px);
@@ -584,7 +613,10 @@ main, #main {
   text-align: left; 
   padding-bottom: 20px;
 }
-#informacion h2 { padding-bottom: 30px;}
+#informacion h2 { 
+  padding-bottom: 30px;
+  text-align: center;
+}
 
 
 #videoinfo {
@@ -665,15 +697,13 @@ video {
 .caracteristica .iconocaracteristicas {
   width: 45px;
   height: 45px;
+  filter: invert(100%);
 }
 
-.caracteristica:hover {
-  transform: scale(1.05) translateY(-5px);
-  background:rgba(255, 255, 255, 0.133);
-}
 
 .caracteristica img {
-  filter: drop-shadow(0px 0px 2px var(--color-secundario));
+
+  color: var(--color-secundario);
 }
 
 .h2swiper2 {
