@@ -377,11 +377,11 @@ pointer-events: none;
 }
 
 /* Efecto Hover */
-.header__menu-link:hover {
+.header__menu-link:hover, #hover {
   color: var(--color-principal);
 }
 
-.header__menu-link:hover::after {
+.header__menu-link:hover::after, #hover::after {
   width: 80%;
   background-color: var(--color-principal); 
 }
