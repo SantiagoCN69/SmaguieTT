@@ -751,3 +751,6 @@ background-color:#000;
     font-size: 0.9rem;
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
+.categoria__titulo {
+    font-size: 20px;
+}
