@@ -628,14 +628,14 @@ main, #main {
 
 #textoinfo p {
     color: #ccc;
-    font-size: 1rem;
+    font-size: .9rem;
     line-height: 1.8;
     margin: 0;
 }
 #textoinfo p:first-of-type {
     color: #fff;
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: 10px;
 }
 
@@ -934,118 +934,156 @@ display: none;
   }
 }
 
+/* Contenedor General */
 .final {
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 50px;
-}
-.final-texto {
-  font-size: 1.2rem;
-  line-height: 20px;
   text-align: center;
-}
-.final-span {
-  font-size: 1.1rem;
-  line-height: 20px;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.3s;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.final-span:hover {
-  transform: scale(1.2);
-  text-shadow: 0px 0px 5px var(--color-principal);
+/* La frase inspiradora */
+.final-texto {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #fff;
+  font-style: italic;
+  font-family: 'Georgia', serif;
+  line-height: 1.6;
+  margin: 40px 0;
+  padding: 0 20px;
 }
+
+.final a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.final-span {
+    color: #ff3d98;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    padding-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.final-span::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #ff3d98;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.final a:hover .final-span {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 61, 152, 0.8);
+}
+
+.final a:hover .final-span::after {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .final-texto {
+        font-size: 1.2rem;
+    }
+    
+    .final-span {
+        font-size: 1rem;
+    }
+    
+    .final .Medium {
+        width: 80%;
+    }
+}
+/* Contenedor principal */
 .footer {
-  margin-top: auto;
-  background-color: var(--fondo-translucido);
-  -webkit-backdrop-filter: blur(7px);
-  backdrop-filter: blur(7px);
-  padding: 32px 30px 13px;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: end;
-  text-align: center;
+  background-color: #000;
+  padding: 60px 20px 20px;
+  border-top: 1px solid #1a1a1a;
 }
-
-
-
-.footer__list {
-  list-style: none;
-  display: flex;
-  gap: 15px;
-  padding: 0;
-  margin: 0;
-  transition: transform 0.5s;
-}
-
-.footer__item {
-  opacity: 0;
-  transform: translateX(-30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.footer__item--visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-
-.footer__link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.footer__icon {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.footer__link--whatsapp { background-color: #1fba0e; }
-.footer__link--facebook  { background-color: #00f; }
-.footer__link--instagram { background-color: #f0f; }
-.footer__link--tiktok    { background-color: #C6004C; }
-
-.footer__link--whatsapp:hover  { filter: drop-shadow(0 0 10px #1fba0e); transform: scale(1.1); }
-.footer__link--facebook:hover  { filter: drop-shadow(0 0 10px #00f); transform: scale(1.1); }
-.footer__link--instagram:hover { filter: drop-shadow(0 0 10px #f0f); transform: scale(1.1); }
-.footer__link--tiktok:hover    { filter: drop-shadow(0 0 10px #C6004C); transform: scale(1.1); }
-
-.footer__text {
-  color: gray;
-  font-size: 13px;
-  text-align: center;
-  opacity: 0;
-  transform: translateX(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.footer__text--visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-@media screen and (max-width: 600px) {
+@media (max-width: 600px) {
   .footer {
     flex-direction: column;
     align-items: center;
-  }
-
-  .footer__list {
-    margin-bottom: 15px;
+    gap: 20px;
   }
 }
 
+.footer__list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 0;
+}
+
+.footer__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+}
+
+.footer__icon {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease;
+    object-fit: contain;
+}
+
+  /* Colores de cada red social */
+.footer__link--whatsapp { background-color: #25D366; }
+.footer__link--facebook { background-color: #1877F2; }
+.footer__link--instagram { 
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); 
+}
+.footer__link--tiktok { background-color: #FF0050; }
+
+.footer__link:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 5px 15px rgba(255, 61, 152, 0.3);
+}
+
+.footer__link:hover .footer__icon {
+    transform: scale(1.1);
+}
+
+.footer__text, 
+.footer p {
+  text-align: end;
+    color: #666;
+    font-size: 0.85rem;
+    margin: 5px 0;
+}
+
+.footer p a {
+    color: #ff3d98;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.footer p a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
 
 @font-face {
   font-family: custom;
