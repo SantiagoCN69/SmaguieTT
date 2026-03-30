@@ -81,13 +81,13 @@ let swiper2 = new Swiper(".productos__content", {
     },
 
     breakpoints: {
-    600: {
+    520: {
         slidesPerView: 2,
     },
-    968: {
+    720: {
         slidesPerView: 3,
     },
-    1180: {
+    920: {
         slidesPerView: 4,
     }
     },
