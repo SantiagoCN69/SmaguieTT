@@ -167,8 +167,10 @@ body {
   flex-direction: column;
   font-family: Arial, sans-serif;
   background-color: var(--color-fondo); 
-  background-image: var(--imagen-fondo);
-  background-size: 100% auto; 
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    var(--imagen-fondo);
+  background-size: 100% auto, 100% auto; 
   transition: background-color 0.3s ease-in-out, background-image 0.8s ease-in-out;
   background-attachment: fixed;
   color: var(--color-texto);
@@ -657,55 +659,86 @@ video {
 
 /* Sección de características (Flex adaptable) */
 #caracteristicas {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; 
-  gap: 30px; 
-  background:var(--fondo-translucido);
-  
-  -webkit-backdrop-filter: blur(7px);
-  backdrop-filter: blur(7px);
-  border-radius: 10px;
-  padding: 30px;
-  transition: transform 0.3s;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    padding: 50px 20px;
+    background-color: #0005;
+    backdrop-filter: blur(10px);
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 10px;
 }
 
 .caracteristica {
-  display: flex;
-  flex: 1 1 100px; 
-  flex-direction: column;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  transition: transform 0.3s ease-in-out;
+    background: #111;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #222;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Efecto al pasar el mouse */
+.caracteristica:hover {
+    transform: translateY(-10px);
+    border-color: #ff3d98; /* Acento fucsia */
+    box-shadow: 0 10px 30px rgba(255, 61, 152, 0.1);
+}
+
+/* Títulos con Iconos */
 .caracteristica h3 {
-  font-size: 20px;
-  margin-bottom: 20px;
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  justify-content: space-around;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    gap: 12px;
 }
 
+/* Estilo de los iconos */
+.iconocaracteristicas {
+    filter: brightness(0) invert(1); /* Convierte iconos oscuros a blancos si son PNG/SVG */
+    transition: transform 0.3s ease;
+}
+
+.caracteristica:hover .iconocaracteristicas {
+    transform: rotate(10deg) scale(1.1);
+}
+
+/* Texto de descripción */
 .caracteristica p {
-  text-align: justify;
+    color: #aaa;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
 }
 
-.caracteristica .iconocaracteristicas {
-  width: 45px;
-  height: 45px;
-  filter: invert(100%);
+/* Detalle decorativo lateral (opcional) */
+.caracteristica::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: #ff3d98;
+    transition: height 0.3s ease;
 }
 
-
-.caracteristica img {
-
-  color: var(--color-secundario);
+.caracteristica:hover::before {
+    height: 100%;
 }
 
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    #caracteristicas {
+        padding: 40px 15px;
+        grid-template-columns: 1fr; /* Una sola columna en móvil */
+    }
+}
 .h2swiper2 {
   margin-top: 20px;
   margin-bottom: 20px;
